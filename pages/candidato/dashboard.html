@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — ConectaLeiria</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/dashboard.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <a class="navbar-logo" href="../../index.html">
+      <span class="logo-texto">Conecta<span class="logo-verde">Leiria</span></span>
+    </a>
+    <div class="navbar-ctas">
+      <span id="nomeUtilizador" class="navbar-user">👤</span>
+      <button onclick="DB.logout()" class="btn btn-secundario">Sair</button>
+    </div>
+  </nav>
+
+  <div class="dash-layout">
+    <aside class="sidebar">
+      <div class="sidebar-menu">
+        <a href="dashboard.html" class="sidebar-item ativo">🏠 <span>Dashboard</span></a>
+        <a href="curriculo.html" class="sidebar-item">📄 <span>Meu Currículo</span></a>
+        <a href="../../index.html" class="sidebar-item">🔍 <span>Ver Vagas</span></a>
+        <a href="#" onclick="DB.logout()" class="sidebar-item sair">🚪 <span>Sair</span></a>
+      </div>
+    </aside>
+
+    <main class="dash-main">
+      <div class="dash-header">
+        <div>
+          <h1 class="dash-titulo" id="boasVindas">Olá! 👋</h1>
+          <p class="dash-sub">Bem-vindo ao teu espaço no ConectaLeiria.</p>
+        </div>
+        <a href="curriculo.html" class="btn btn-primario">✏️ Editar Currículo</a>
+      </div>
+
+      <!-- CARTÕES DE ESTADO -->
+      <div class="dash-cards">
+        <div class="dash-card">
+          <div class="dash-card-icone" style="background:linear-gradient(135deg,#1a6b3c,#2ecc71)">📄</div>
+          <div class="dash-card-info">
+            <div class="dash-card-num" id="statusCurriculo">Incompleto</div>
+            <div class="dash-card-label">Estado do Currículo</div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-icone" style="background:linear-gradient(135deg,#c9a84c,#f0d080)">🏢</div>
+          <div class="dash-card-info">
+            <div class="dash-card-num" id="numEmpresas">—</div>
+            <div class="dash-card-label">Empresas na plataforma</div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-icone" style="background:linear-gradient(135deg,#1a1a2e,#2d2d6e)">📍</div>
+          <div class="dash-card-info">
+            <div class="dash-card-num" id="concelhoUser">—</div>
+            <div class="dash-card-label">O teu concelho</div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-icone" style="background:linear-gradient(135deg,#e74c3c,#e67e22)">🎯</div>
+          <div class="dash-card-info">
+            <div class="dash-card-num" id="areaUser">—</div>
+            <div class="dash-card-label">A tua área</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CURRÍCULO RESUMO -->
+      <div class="dash-secao">
+        <div class="dash-secao-titulo">📋 Resumo do teu Currículo</div>
+        <div id="resumoCurriculo" class="curriculo-resumo">
+          <div class="resumo-vazio">
+            <div style="font-size:3rem;margin-bottom:1rem">📄</div>
+            <h3>Currículo ainda não preenchido</h3>
+            <p>Preenche o teu currículo para seres encontrado pelas empresas de Leiria.</p>
+            <a href="curriculo.html" class="btn btn-primario" style="margin-top:1rem">Preencher Currículo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- DICAS -->
+      <div class="dash-secao">
+        <div class="dash-secao-titulo">💡 Dicas para te destacares</div>
+        <div class="dicas-grid">
+          <div class="dica-card">
+            <span class="dica-icone">📸</span>
+            <div class="dica-texto">
+              <strong>Preenche o perfil completo</strong>
+              <p>Candidatos com perfil 100% têm 3x mais hipóteses de ser contactados.</p>
+            </div>
+          </div>
+          <div class="dica-card">
+            <span class="dica-icone">🎯</span>
+            <div class="dica-texto">
+              <strong>Escolhe a área certa</strong>
+              <p>Define bem a tua área de interesse para aparecer nas pesquisas certas.</p>
+            </div>
+          </div>
+          <div class="dica-card">
+            <span class="dica-icone">📝</span>
+            <div class="dica-texto">
+              <strong>Escreve sobre ti</strong>
+              <p>Uma boa apresentação pessoal faz toda a diferença para o empregador.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="../../js/app.js"></script>
+  <script src="../../js/dashboard-candidato.js"></script>
+</body>
+</html>

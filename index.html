@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ConectaLeiria — Conectando Talentos ao Futuro</title>
+  <meta name="description" content="A plataforma de emprego do Distrito de Leiria." />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#1a6b3c" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a class="navbar-logo" href="index.html">
+      <span class="logo-texto">Conecta<span class="logo-verde">Leiria</span></span>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="#como-funciona">Como Funciona</a></li>
+      <li><a href="#areas">Áreas</a></li>
+      <li><a href="#distritos">Distritos</a></li>
+      <li><a href="pages/empresa/login.html">Sou Empresa</a></li>
+    </ul>
+    <div class="navbar-ctas">
+      <a href="pages/candidato/login.html" class="btn btn-secundario">Entrar</a>
+      <a href="pages/candidato/registo.html" class="btn btn-primario">Criar Conta</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MENU MOBILE -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose">✕</button>
+    <a href="#como-funciona">Como Funciona</a>
+    <a href="#areas">Áreas</a>
+    <a href="#distritos">Distritos</a>
+    <a href="pages/empresa/login.html">Sou Empresa</a>
+    <a href="pages/candidato/registo.html" class="btn btn-dourado btn-grande" style="margin-top:1rem;">Criar Conta Grátis</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-conteudo">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Plataforma ativa no Distrito de Leiria
+        </div>
+        <h1 class="hero-titulo">
+          O teu próximo<br>
+          <span>emprego começa</span><br>
+          aqui.
+        </h1>
+        <p class="hero-subtitulo">
+          Conectamos candidatos e empresas do Distrito de Leiria.
+          Coloca o teu currículo e deixa as melhores oportunidades chegarem até ti.
+        </p>
+        <div class="hero-ctas">
+          <a href="pages/candidato/registo.html" class="btn btn-primario btn-grande">🎯 Procuro Emprego</a>
+          <a href="pages/empresa/registo.html" class="btn btn-dourado btn-grande">🏢 Sou Empresa</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num" data-valor="12" data-sufixo="+">12+</div>
+            <div class="hero-stat-label">Concelhos cobertos</div>
+          </div>
+          <div>
+            <div class="hero-stat-num" data-valor="8" data-sufixo=" áreas">8 áreas</div>
+            <div class="hero-stat-label">De emprego</div>
+          </div>
+          <div>
+            <div class="hero-stat-num" data-valor="100" data-sufixo="% grátis">100% grátis</div>
+            <div class="hero-stat-label">Para candidatos</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card-principal">
+          <div class="card-empresa-logo">🍽️</div>
+          <div class="card-empresa-nome">Restaurante Solar do Lis</div>
+          <div class="card-empresa-local">📍 Leiria, Centro</div>
+          <div class="card-tags">
+            <span class="tag verde">Restauração</span>
+            <span class="tag">Tempo Inteiro</span>
+            <span class="tag">Leiria</span>
+          </div>
+          <div class="card-match">
+            <div>
+              <div class="match-texto">Compatibilidade com</div>
+              <div style="font-weight:600;font-size:0.85rem;color:#333">Ana Costa · Cozinheira</div>
+            </div>
+            <div style="text-align:right">
+              <div class="match-numero">94%</div>
+              <div class="match-texto" style="font-size:0.75rem;">match</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card-mini">
+          <div class="mini-titulo">Candidatos Ativos</div>
+          <div class="mini-sub">À procura de emprego agora</div>
+          <div class="mini-avatares">
+            <div class="mini-avatar" style="background:#e8f5e9;color:#2e7d32">AC</div>
+            <div class="mini-avatar" style="background:#fff3e0;color:#e65100">JF</div>
+            <div class="mini-avatar" style="background:#e3f2fd;color:#1565c0">MR</div>
+            <div class="mini-avatar" style="background:#fce4ec;color:#880e4f">TP</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISTRITOS -->
+  <section class="distritos-section" id="distritos">
+    <p class="distritos-label">Cobrimos todo o distrito de Leiria</p>
+    <div class="distritos-faixa">
+      <div class="distritos-scroll">
+        <span class="distrito-item">🏖️ Nazaré</span>
+        <span class="distrito-item">🏰 Leiria</span>
+        <span class="distrito-item">🌊 Alcobaça</span>
+        <span class="distrito-item">🌡️ Caldas da Rainha</span>
+        <span class="distrito-item">🏭 Marinha Grande</span>
+        <span class="distrito-item">🌾 Pombal</span>
+        <span class="distrito-item">🏘️ Batalha</span>
+        <span class="distrito-item">🐟 Peniche</span>
+        <span class="distrito-item">⛵ Óbidos</span>
+        <span class="distrito-item">🌲 Pedrógão Grande</span>
+        <span class="distrito-item">🏞️ Figueiró dos Vinhos</span>
+        <span class="distrito-item">🌳 Ansião</span>
+        <span class="distrito-item">🏖️ Nazaré</span>
+        <span class="distrito-item">🏰 Leiria</span>
+        <span class="distrito-item">🌊 Alcobaça</span>
+        <span class="distrito-item">🌡️ Caldas da Rainha</span>
+        <span class="distrito-item">🏭 Marinha Grande</span>
+        <span class="distrito-item">🌾 Pombal</span>
+        <span class="distrito-item">🏘️ Batalha</span>
+        <span class="distrito-item">🐟 Peniche</span>
+        <span class="distrito-item">⛵ Óbidos</span>
+        <span class="distrito-item">🌲 Pedrógão Grande</span>
+        <span class="distrito-item">🏞️ Figueiró dos Vinhos</span>
+        <span class="distrito-item">🌳 Ansião</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="como-funciona" id="como-funciona">
+    <div class="section-header">
+      <span class="section-label">✦ Simples e Rápido</span>
+      <h2 class="section-titulo">Como funciona o ConectaLeiria?</h2>
+      <p class="section-sub">Um processo pensado para ser fácil tanto para candidatos como para empresas.</p>
+    </div>
+    <div class="tabs-tipo">
+      <button class="tab-btn ativo" data-tipo="candidato">👤 Para Candidatos</button>
+      <button class="tab-btn" data-tipo="empresa">🏢 Para Empresas</button>
+    </div>
+    <div class="passos-grid passos-conteudo" data-tipo="candidato">
+      <div class="passo-card">
+        <span class="passo-numero">1</span>
+        <div class="passo-icone">📝</div>
+        <h3 class="passo-titulo">Cria a tua conta</h3>
+        <p class="passo-desc">Regista-te gratuitamente. Demora menos de 2 minutos.</p>
+      </div>
+      <div class="passo-card">
+        <span class="passo-numero">2</span>
+        <div class="passo-icone">📄</div>
+        <h3 class="passo-titulo">Preenche o teu currículo</h3>
+        <p class="passo-desc">Adiciona experiências, competências e o tipo de trabalho que procuras.</p>
+      </div>
+      <div class="passo-card">
+        <span class="passo-numero">3</span>
+        <div class="passo-icone">🎯</div>
+        <h3 class="passo-titulo">Escolhe a tua área</h3>
+        <p class="passo-desc">Restauração, hotelaria, comércio, indústria e muito mais.</p>
+      </div>
+      <div class="passo-card">
+        <span class="passo-numero">4</span>
+        <div class="passo-icone">🤝</div>
+        <h3 class="passo-titulo">Recebe propostas</h3>
+        <p class="passo-desc">As empresas veem o teu currículo e entram em contacto contigo.</p>
+      </div>
+    </div>
+    <div class="passos-grid passos-conteudo" data-tipo="empresa" style="display:none">
+      <div class="passo-card">
+        <span class="passo-numero">1</span>
+        <div class="passo-icone">🏢</div>
+        <h3 class="passo-titulo">Regista a empresa</h3>
+        <p class="passo-desc">Cria o perfil do teu restaurante ou empresa com localização e área de negócio.</p>
+      </div>
+      <div class="passo-card">
+        <span class="passo-numero">2</span>
+        <div class="passo-icone">📋</div>
+        <h3 class="passo-titulo">Publica as tuas vagas</h3>
+        <p class="passo-desc">Descreve a função, os requisitos e o tipo de contrato oferecido.</p>
+      </div>
+      <div class="passo-card">
+        <span class="passo-numero">3</span>
+        <div class="passo-icone">🔍</div>
+        <h3 class="passo-titulo">Vê os currículos</h3>
+        <p class="passo-desc">Acede à lista de candidatos que correspondem ao perfil que procuras.</p>
+      </div>
+      <div class="passo-card">
+        <span class="passo-numero">4</span>
+        <div class="passo-icone">✅</div>
+        <h3 class="passo-titulo">Contrata com confiança</h3>
+        <p class="passo-desc">Entra em contacto com o candidato ideal e contrata o teu novo funcionário.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÁREAS -->
+  <section class="areas-section" id="areas">
+    <div class="section-header">
+      <span class="section-label">✦ Todas as Áreas</span>
+      <h2 class="section-titulo">Que tipo de emprego procuras?</h2>
+      <p class="section-sub">Clica numa área e vê as oportunidades disponíveis no Distrito de Leiria.</p>
+    </div>
+    <div class="areas-grid">
+      <div class="area-card" data-area="restauracao"><span class="area-emoji">🍽️</span><div class="area-nome">Restauração</div><div class="area-vagas">Cozinheiros, Empregados de Mesa...</div></div>
+      <div class="area-card" data-area="hotelaria"><span class="area-emoji">🏨</span><div class="area-nome">Hotelaria</div><div class="area-vagas">Rececionistas, Limpeza...</div></div>
+      <div class="area-card" data-area="comercio"><span class="area-emoji">🛍️</span><div class="area-nome">Comércio</div><div class="area-vagas">Vendedores, Repositores...</div></div>
+      <div class="area-card" data-area="industria"><span class="area-emoji">🏭</span><div class="area-nome">Indústria</div><div class="area-vagas">Operadores, Técnicos...</div></div>
+      <div class="area-card" data-area="construcao"><span class="area-emoji">🏗️</span><div class="area-nome">Construção</div><div class="area-vagas">Pedreiros, Eletricistas...</div></div>
+      <div class="area-card" data-area="saude"><span class="area-emoji">⚕️</span><div class="area-nome">Saúde & Bem-estar</div><div class="area-vagas">Auxiliares, Cuidadores...</div></div>
+      <div class="area-card" data-area="tecnologia"><span class="area-emoji">💻</span><div class="area-nome">Tecnologia</div><div class="area-vagas">Programadores, IT...</div></div>
+      <div class="area-card" data-area="outro"><span class="area-emoji">📦</span><div class="area-nome">Outras Áreas</div><div class="area-vagas">Logística, Agricultura...</div></div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <span class="section-label" style="color:rgba(255,255,255,0.6)">✦ Começa hoje</span>
+      <h2 class="cta-titulo">Pronto para dar o próximo passo?</h2>
+      <p class="cta-sub">Junta-te à plataforma de emprego do Distrito de Leiria. Totalmente gratuito para candidatos.</p>
+      <div class="cta-btns">
+        <a href="pages/candidato/registo.html" class="btn btn-dourado btn-grande">🎯 Criar Conta de Candidato</a>
+        <a href="pages/empresa/registo.html" class="btn btn-grande" style="border:2px solid rgba(255,255,255,0.4);color:white;background:transparent;border-radius:50px;padding:1rem 2.4rem;font-weight:600;text-decoration:none;">🏢 Registar Empresa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="logo-texto" style="font-size:1.3rem;color:white;">Conecta<span class="logo-verde">Leiria</span></div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-top:4px;font-style:italic;">Conectando Talentos ao Futuro</div>
+      </div>
+      <div class="footer-texto">
+        <div>© 2025 ConectaLeiria · Todos os direitos reservados</div>
+        <div class="footer-distritos">Nazaré · Leiria · Alcobaça · Caldas da Rainha · Marinha Grande · Pombal · e mais</div>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacidade</a>
+        <a href="#">Termos</a>
+        <a href="#">Contacto</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

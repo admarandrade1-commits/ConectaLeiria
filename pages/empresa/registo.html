@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registar Empresa — ConectaLeiria</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/auth.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body class="auth-body">
+
+  <div class="auth-container">
+
+    <div class="auth-esquerda auth-esquerda-empresa">
+      <a href="../../index.html" class="logo-texto">Conecta<span class="logo-verde">Leiria</span></a>
+      <div class="auth-esquerda-conteudo">
+        <h2>Encontra o funcionário ideal</h2>
+        <p>Acede a currículos de candidatos do Distrito de Leiria prontos para trabalhar na tua empresa.</p>
+        <div class="auth-beneficios">
+          <div class="beneficio"><span>🔍</span> Pesquisa por área e concelho</div>
+          <div class="beneficio"><span>📋</span> Currículos detalhados</div>
+          <div class="beneficio"><span>✅</span> Contratação direta e simples</div>
+          <div class="beneficio"><span>🏢</span> Restaurantes e empresas</div>
+        </div>
+      </div>
+      <div class="auth-deco">CL</div>
+    </div>
+
+    <div class="auth-direita">
+      <div class="auth-form-wrap">
+        <div class="auth-topo">
+          <h1 class="auth-titulo">Registar Empresa</h1>
+          <p class="auth-sub">Já tens conta? <a href="login.html">Entra aqui</a></p>
+        </div>
+
+        <form id="formRegistoEmpresa" class="auth-form" novalidate>
+
+          <div class="form-grupo">
+            <label for="nomeEmpresa">Nome da Empresa / Restaurante</label>
+            <input type="text" id="nomeEmpresa" placeholder="Ex: Restaurante Solar do Lis" required />
+            <span class="erro" id="erro-nomeEmpresa"></span>
+          </div>
+
+          <div class="form-row dois">
+            <div class="form-grupo">
+              <label for="tipoEmpresa">Tipo de Negócio</label>
+              <select id="tipoEmpresa">
+                <option value="">Seleciona...</option>
+                <option>Restaurante</option>
+                <option>Café / Pastelaria</option>
+                <option>Hotel</option>
+                <option>Comércio</option>
+                <option>Indústria</option>
+                <option>Construção</option>
+                <option>Saúde</option>
+                <option>Tecnologia</option>
+                <option>Outro</option>
+              </select>
+            </div>
+            <div class="form-grupo">
+              <label for="concelhoEmpresa">Concelho</label>
+              <select id="concelhoEmpresa">
+                <option value="">Seleciona...</option>
+                <option>Nazaré</option>
+                <option>Leiria</option>
+                <option>Alcobaça</option>
+                <option>Caldas da Rainha</option>
+                <option>Marinha Grande</option>
+                <option>Pombal</option>
+                <option>Batalha</option>
+                <option>Peniche</option>
+                <option>Óbidos</option>
+                <option>Pedrógão Grande</option>
+                <option>Figueiró dos Vinhos</option>
+                <option>Ansião</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grupo">
+            <label for="morada">Morada</label>
+            <input type="text" id="morada" placeholder="Ex: Rua de Leiria, 25, Leiria" />
+          </div>
+
+          <div class="form-row dois">
+            <div class="form-grupo">
+              <label for="emailEmpresa">Email</label>
+              <input type="email" id="emailEmpresa" placeholder="empresa@email.com" required />
+              <span class="erro" id="erro-emailEmpresa"></span>
+            </div>
+            <div class="form-grupo">
+              <label for="telefoneEmpresa">Telefone</label>
+              <input type="tel" id="telefoneEmpresa" placeholder="2XX XXX XXX" />
+            </div>
+          </div>
+
+          <div class="form-row dois">
+            <div class="form-grupo">
+              <label for="senhaEmpresa">Senha</label>
+              <div class="input-senha">
+                <input type="password" id="senhaEmpresa" placeholder="Mínimo 6 caracteres" required />
+                <button type="button" class="ver-senha" onclick="toggleSenha('senhaEmpresa')">👁️</button>
+              </div>
+              <span class="erro" id="erro-senhaEmpresa"></span>
+            </div>
+            <div class="form-grupo">
+              <label for="confirmarEmpresa">Confirmar Senha</label>
+              <div class="input-senha">
+                <input type="password" id="confirmarEmpresa" placeholder="Repete a senha" required />
+                <button type="button" class="ver-senha" onclick="toggleSenha('confirmarEmpresa')">👁️</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" id="termosEmpresa" required />
+            <label for="termosEmpresa">Aceito os <a href="#">Termos</a> e a <a href="#">Política de Privacidade</a></label>
+          </div>
+
+          <button type="submit" class="btn btn-dourado btn-grande btn-full">
+            Registar Empresa 🏢
+          </button>
+
+        </form>
+
+        <div class="auth-divisor"><span>ou</span></div>
+        <p class="auth-empresa-link">És candidato? <a href="../candidato/registo.html">Cria uma conta de candidato →</a></p>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/app.js"></script>
+  <script src="../../js/auth.js"></script>
+</body>
+</html>

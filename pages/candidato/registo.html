@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criar Conta — ConectaLeiria</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/auth.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body class="auth-body">
+
+  <div class="auth-container">
+
+    <!-- LADO ESQUERDO -->
+    <div class="auth-esquerda">
+      <a href="../../index.html" class="logo-texto">Conecta<span class="logo-verde">Leiria</span></a>
+      <div class="auth-esquerda-conteudo">
+        <h2>Começa a tua jornada profissional</h2>
+        <p>Junta-te a centenas de candidatos do Distrito de Leiria que já encontraram o emprego dos seus sonhos.</p>
+        <div class="auth-beneficios">
+          <div class="beneficio"><span>✅</span> Registo 100% gratuito</div>
+          <div class="beneficio"><span>✅</span> Currículo digital completo</div>
+          <div class="beneficio"><span>✅</span> Visível para empresas de Leiria</div>
+          <div class="beneficio"><span>✅</span> Nazaré, Alcobaça, Caldas e mais</div>
+        </div>
+      </div>
+      <div class="auth-deco">CL</div>
+    </div>
+
+    <!-- LADO DIREITO -->
+    <div class="auth-direita">
+      <div class="auth-form-wrap">
+        <div class="auth-topo">
+          <h1 class="auth-titulo">Criar Conta</h1>
+          <p class="auth-sub">Já tens conta? <a href="login.html">Entra aqui</a></p>
+        </div>
+
+        <form id="formRegisto" class="auth-form" novalidate>
+
+          <div class="form-row">
+            <div class="form-grupo">
+              <label for="nome">Nome Completo</label>
+              <input type="text" id="nome" placeholder="Ex: João Silva" required />
+              <span class="erro" id="erro-nome"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-grupo">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="joao@email.com" required />
+              <span class="erro" id="erro-email"></span>
+            </div>
+          </div>
+
+          <div class="form-row dois">
+            <div class="form-grupo">
+              <label for="telefone">Telefone</label>
+              <input type="tel" id="telefone" placeholder="9XX XXX XXX" />
+            </div>
+            <div class="form-grupo">
+              <label for="concelho">Concelho</label>
+              <select id="concelho">
+                <option value="">Seleciona...</option>
+                <option>Nazaré</option>
+                <option>Leiria</option>
+                <option>Alcobaça</option>
+                <option>Caldas da Rainha</option>
+                <option>Marinha Grande</option>
+                <option>Pombal</option>
+                <option>Batalha</option>
+                <option>Peniche</option>
+                <option>Óbidos</option>
+                <option>Pedrógão Grande</option>
+                <option>Figueiró dos Vinhos</option>
+                <option>Ansião</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row dois">
+            <div class="form-grupo">
+              <label for="senha">Senha</label>
+              <div class="input-senha">
+                <input type="password" id="senha" placeholder="Mínimo 6 caracteres" required />
+                <button type="button" class="ver-senha" onclick="toggleSenha('senha')">👁️</button>
+              </div>
+              <span class="erro" id="erro-senha"></span>
+            </div>
+            <div class="form-grupo">
+              <label for="confirmar">Confirmar Senha</label>
+              <div class="input-senha">
+                <input type="password" id="confirmar" placeholder="Repete a senha" required />
+                <button type="button" class="ver-senha" onclick="toggleSenha('confirmar')">👁️</button>
+              </div>
+              <span class="erro" id="erro-confirmar"></span>
+            </div>
+          </div>
+
+          <div class="form-grupo">
+            <label for="area">Área de Interesse</label>
+            <select id="area">
+              <option value="">Seleciona a tua área...</option>
+              <option>Restauração</option>
+              <option>Hotelaria</option>
+              <option>Comércio</option>
+              <option>Indústria</option>
+              <option>Construção</option>
+              <option>Saúde & Bem-estar</option>
+              <option>Tecnologia</option>
+              <option>Outra</option>
+            </select>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" id="termos" required />
+            <label for="termos">Aceito os <a href="#">Termos e Condições</a> e a <a href="#">Política de Privacidade</a></label>
+          </div>
+          <span class="erro" id="erro-termos"></span>
+
+          <button type="submit" class="btn btn-primario btn-grande btn-full">
+            Criar Conta Grátis 🚀
+          </button>
+
+        </form>
+
+        <div class="auth-divisor"><span>ou</span></div>
+        <p class="auth-empresa-link">És uma empresa? <a href="../empresa/registo.html">Regista a tua empresa aqui →</a></p>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/app.js"></script>
+  <script src="../../js/auth.js"></script>
+</body>
+</html>

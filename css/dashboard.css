@@ -1,0 +1,85 @@
+.dash-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh;padding-top:72px}
+.sidebar{background:var(--azul-noite);padding:2rem 0;position:fixed;top:72px;left:0;width:240px;height:calc(100vh - 72px);overflow-y:auto;z-index:100}
+.sidebar-menu{display:flex;flex-direction:column;gap:.3rem;padding:0 1rem}
+.sidebar-item{display:flex;align-items:center;gap:.8rem;padding:.85rem 1rem;border-radius:10px;color:rgba(255,255,255,.6);text-decoration:none;font-size:.92rem;font-weight:500;transition:var(--transicao);cursor:pointer;border:none;background:none;width:100%;text-align:left}
+.sidebar-item:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.9)}
+.sidebar-item.ativo{background:var(--verde-escuro);color:#fff}
+.sidebar-item.sair{margin-top:2rem;color:rgba(255,100,100,.7)}
+.sidebar-item.sair:hover{background:rgba(255,100,100,.1);color:#ff6464}
+.navbar-user{font-size:.9rem;font-weight:600;color:var(--verde-escuro);background:rgba(26,107,60,.08);padding:.4rem 1rem;border-radius:50px}
+.dash-main{margin-left:240px;padding:2.5rem;background:#f7f9f7;min-height:calc(100vh - 72px)}
+.dash-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.dash-titulo{font-family:var(--fonte-display);font-size:clamp(1.5rem,3vw,2rem);color:var(--azul-noite);margin-bottom:.3rem}
+.dash-sub{font-size:.95rem;color:var(--cinza-medio)}
+.dash-progresso-wrap{display:flex;align-items:center;gap:.8rem;background:#fff;padding:.8rem 1.2rem;border-radius:12px;box-shadow:var(--sombra-suave)}
+.progresso-label{font-size:.82rem;color:var(--cinza-medio);white-space:nowrap}
+.progresso-barra{width:120px;height:8px;background:#e0e0e0;border-radius:50px;overflow:hidden}
+.progresso-fill{height:100%;background:linear-gradient(90deg,var(--verde-escuro),var(--verde-medio));border-radius:50px;transition:width .6s ease}
+.progresso-percent{font-size:.85rem;font-weight:700;color:var(--verde-escuro);white-space:nowrap}
+.dash-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;margin-bottom:2rem}
+.dash-card{background:#fff;border-radius:var(--raio);padding:1.4rem;display:flex;align-items:center;gap:1rem;box-shadow:var(--sombra-suave);border:1px solid rgba(26,107,60,.06);transition:var(--transicao)}
+.dash-card:hover{transform:translateY(-3px);box-shadow:var(--sombra-media)}
+.dash-card-icone{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.dash-card-num{font-family:var(--fonte-display);font-size:1.3rem;font-weight:900;color:var(--azul-noite);line-height:1.2}
+.dash-card-label{font-size:.78rem;color:var(--cinza-medio);margin-top:2px}
+.dash-secao{background:#fff;border-radius:var(--raio-grande);padding:1.8rem;margin-bottom:1.5rem;box-shadow:var(--sombra-suave);border:1px solid rgba(26,107,60,.06)}
+.dash-secao-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+.dash-secao-titulo{font-family:var(--fonte-display);font-size:1.1rem;font-weight:700;color:var(--azul-noite);margin-bottom:1.5rem}
+.dash-secao-header .dash-secao-titulo{margin-bottom:0}
+.resumo-vazio{text-align:center;padding:3rem 1rem;color:var(--cinza-medio)}
+.resumo-vazio h3{font-family:var(--fonte-display);margin-bottom:.5rem;color:var(--azul-noite)}
+.curriculo-form{display:flex;flex-direction:column;gap:1.5rem}
+.curriculo-secao{background:#fff;border-radius:var(--raio-grande);padding:2rem;box-shadow:var(--sombra-suave);border:1px solid rgba(26,107,60,.06)}
+.secao-titulo{font-family:var(--fonte-display);font-size:1.1rem;font-weight:700;color:var(--azul-noite);margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem}
+.form-grupo{display:flex;flex-direction:column;gap:.4rem}
+.form-grupo label{font-size:.85rem;font-weight:600;color:var(--cinza-escuro)}
+.form-grupo input,.form-grupo select,.form-grupo textarea{padding:.75rem 1rem;border:2px solid #e8e8e8;border-radius:10px;font-family:var(--fonte-corpo);font-size:.92rem;color:var(--cinza-escuro);background:#fff;transition:var(--transicao);outline:none;width:100%}
+.form-grupo input:focus,.form-grupo select:focus,.form-grupo textarea:focus{border-color:var(--verde-escuro);box-shadow:0 0 0 3px rgba(26,107,60,.1)}
+.form-grupo textarea{resize:vertical;min-height:80px}
+.curriculo-acoes{display:flex;gap:1rem;flex-wrap:wrap;padding-bottom:2rem}
+.cv-resumo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.cv-resumo-item{background:var(--cinza-claro);border-radius:10px;padding:1rem}
+.cv-resumo-label{font-size:.75rem;color:var(--cinza-medio);text-transform:uppercase;letter-spacing:1px;margin-bottom:.3rem}
+.cv-resumo-valor{font-weight:600;color:var(--azul-noite);font-size:.95rem}
+.dicas-grid{display:flex;flex-direction:column;gap:1rem}
+.dica-card{display:flex;align-items:flex-start;gap:1rem;padding:1rem;background:var(--cinza-claro);border-radius:12px}
+.dica-icone{font-size:1.5rem;flex-shrink:0}
+.dica-texto strong{font-size:.92rem;color:var(--azul-noite);display:block;margin-bottom:.2rem}
+.dica-texto p{font-size:.82rem;margin:0}
+.filtros-wrap{display:flex;gap:1rem;flex-wrap:wrap;background:#fff;padding:1.5rem;border-radius:var(--raio);margin-bottom:1.5rem;box-shadow:var(--sombra-suave);align-items:flex-end}
+.filtro-grupo{display:flex;flex-direction:column;gap:.4rem;flex:1;min-width:160px}
+.filtro-grupo label{font-size:.82rem;font-weight:600;color:var(--cinza-escuro)}
+.filtro-grupo select{padding:.65rem 1rem;border:2px solid #e8e8e8;border-radius:10px;font-family:var(--fonte-corpo);font-size:.9rem;color:var(--cinza-escuro);outline:none;transition:var(--transicao);background:#fff}
+.filtro-grupo select:focus{border-color:var(--verde-escuro)}
+.candidatos-total{background:var(--verde-escuro);color:#fff;padding:.6rem 1.2rem;border-radius:50px;font-weight:700;font-size:.9rem}
+.candidatos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+.candidato-card{background:#fff;border-radius:var(--raio);padding:1.5rem;box-shadow:var(--sombra-suave);border:2px solid transparent;transition:var(--transicao);cursor:pointer}
+.candidato-card:hover{border-color:var(--verde-medio);transform:translateY(-4px);box-shadow:var(--sombra-media)}
+.candidato-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--verde-escuro),var(--verde-medio));display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:900;color:#fff;font-family:var(--fonte-display);margin-bottom:1rem}
+.candidato-nome{font-family:var(--fonte-display);font-size:1.05rem;font-weight:700;color:var(--azul-noite);margin-bottom:.3rem}
+.candidato-funcao{font-size:.85rem;color:var(--verde-escuro);font-weight:600;margin-bottom:.8rem}
+.candidato-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.candidato-tag{background:var(--cinza-claro);color:var(--cinza-escuro);padding:.25rem .65rem;border-radius:50px;font-size:.75rem;font-weight:500}
+.candidato-tag.verde{background:rgba(46,204,113,.15);color:var(--verde-escuro)}
+.candidato-btn{width:100%;text-align:center;padding:.6rem;border-radius:8px;background:var(--verde-escuro);color:#fff;border:none;cursor:pointer;font-family:var(--fonte-corpo);font-weight:600;font-size:.88rem;transition:var(--transicao)}
+.candidato-btn:hover{background:#155c33}
+.candidatos-lista{display:flex;flex-direction:column;gap:.8rem}
+.candidato-lista-item{display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--cinza-claro);border-radius:12px;transition:var(--transicao);cursor:pointer}
+.candidato-lista-item:hover{background:rgba(46,204,113,.1)}
+.candidato-lista-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--verde-escuro),var(--verde-medio));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.85rem;flex-shrink:0}
+.candidato-lista-info{flex:1}
+.candidato-lista-nome{font-weight:600;font-size:.92rem;color:var(--azul-noite)}
+.candidato-lista-detalhe{font-size:.78rem;color:var(--cinza-medio);margin-top:2px}
+.modal-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px)}
+.modal-caixa{background:#fff;border-radius:var(--raio-grande);padding:2.5rem;max-width:650px;width:100%;max-height:85vh;overflow-y:auto;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.3)}
+.modal-fechar{position:absolute;top:1.2rem;right:1.2rem;background:var(--cinza-claro);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:var(--transicao)}
+.modal-fechar:hover{background:#e0e0e0}
+.modal-cv-nome{font-family:var(--fonte-display);font-size:1.6rem;font-weight:900;color:var(--azul-noite);margin-bottom:.3rem}
+.modal-cv-funcao{color:var(--verde-escuro);font-weight:600;margin-bottom:1.5rem}
+.modal-cv-secao{margin-bottom:1.5rem}
+.modal-cv-secao-titulo{font-size:.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--cinza-medio);font-weight:700;margin-bottom:.8rem;border-bottom:1px solid #eee;padding-bottom:.4rem}
+.modal-cv-linha{display:flex;gap:.5rem;margin-bottom:.4rem;font-size:.9rem}
+.modal-cv-linha strong{color:var(--azul-noite);min-width:120px}
+.modal-cv-linha span{color:var(--cinza-medio)}
+@media(max-width:768px){.dash-layout{grid-template-columns:1fr}.sidebar{display:none}.dash-main{margin-left:0;padding:1.5rem}.dash-cards{grid-template-columns:repeat(2,1fr)}.form-grid{grid-template-columns:1fr}.filtros-wrap{flex-direction:column}.candidatos-grid{grid-template-columns:1fr}}
