@@ -83,3 +83,38 @@
 .modal-cv-linha strong{color:var(--azul-noite);min-width:120px}
 .modal-cv-linha span{color:var(--cinza-medio)}
 @media(max-width:768px){.dash-layout{grid-template-columns:1fr}.sidebar{display:none}.dash-main{margin-left:0;padding:1.5rem}.dash-cards{grid-template-columns:repeat(2,1fr)}.form-grid{grid-template-columns:1fr}.filtros-wrap{flex-direction:column}.candidatos-grid{grid-template-columns:1fr}}
+
+/* TEXTAREA SOBRE MIM */
+.curriculo-secao .form-grupo textarea {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.curriculo-secao > .form-grupo {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+/* CORRIGIR TEXTAREA */
+.curriculo-secao .form-grupo textarea {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  min-height: 120px;
+  resize: vertical;
+  box-sizing: border-box !important;
+}
+.curriculo-secao > .form-grupo {
+  width: 100% !important;
+  display: block !important;
+}
+
+/* FORÇAR TEXTAREA LARGURA TOTAL */
+.form-grupo textarea {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  display: block !important;
+}

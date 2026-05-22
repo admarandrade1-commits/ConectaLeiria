@@ -5,44 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>O Meu Currículo — ConectaLeiria</title>
   <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/auth.css" />
   <link rel="stylesheet" href="../../css/dashboard.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    .campo-largo {
-      width: 100%;
-      margin-top: 1.2rem;
-    }
-    .campo-largo label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #2d2d2d;
-      margin-bottom: 0.4rem;
-    }
-    .campo-largo textarea {
-      display: block;
-      width: 100%;
-      min-height: 100px;
-      padding: 0.75rem 1rem;
-      border: 2px solid #e8e8e8;
-      border-radius: 10px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      resize: vertical;
-      box-sizing: border-box;
-      color: #2d2d2d;
-      background: white;
-    }
-    .campo-largo textarea:focus {
-      border-color: #1a6b3c;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(26,107,60,0.1);
-    }
-  </style>
 </head>
 <body>
 
+  <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <a class="navbar-logo" href="../../index.html">
       <span class="logo-texto">Conecta<span class="logo-verde">Leiria</span></span>
@@ -54,6 +23,8 @@
   </nav>
 
   <div class="dash-layout">
+
+    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="sidebar-menu">
         <a href="dashboard.html" class="sidebar-item">🏠 <span>Dashboard</span></a>
@@ -63,6 +34,7 @@
       </div>
     </aside>
 
+    <!-- CONTEÚDO -->
     <main class="dash-main">
       <div class="dash-header">
         <div>
@@ -80,7 +52,7 @@
 
       <form id="formCurriculo" class="curriculo-form">
 
-        <!-- DADOS PESSOAIS -->
+        <!-- SECÇÃO 1: DADOS PESSOAIS -->
         <div class="curriculo-secao">
           <div class="secao-titulo"><span>👤</span> Dados Pessoais</div>
           <div class="form-grid">
@@ -104,30 +76,39 @@
               <label>Concelho</label>
               <select id="cv_concelho">
                 <option value="">Seleciona...</option>
-                <option>Nazaré</option><option>Leiria</option>
-                <option>Alcobaça</option><option>Caldas da Rainha</option>
-                <option>Marinha Grande</option><option>Pombal</option>
-                <option>Batalha</option><option>Peniche</option>
-                <option>Óbidos</option><option>Pedrógão Grande</option>
-                <option>Figueiró dos Vinhos</option><option>Ansião</option>
+                <option>Nazaré</option>
+                <option>Leiria</option>
+                <option>Alcobaça</option>
+                <option>Caldas da Rainha</option>
+                <option>Marinha Grande</option>
+                <option>Pombal</option>
+                <option>Batalha</option>
+                <option>Peniche</option>
+                <option>Óbidos</option>
+                <option>Pedrógão Grande</option>
+                <option>Figueiró dos Vinhos</option>
+                <option>Ansião</option>
               </select>
             </div>
             <div class="form-grupo">
               <label>Carta de Condução</label>
               <select id="cv_carta">
                 <option value="">Seleciona...</option>
-                <option>Não tenho</option><option>Categoria B</option>
-                <option>Categoria B + C</option><option>Categoria B + D</option>
+                <option>Não tenho</option>
+                <option>Categoria B</option>
+                <option>Categoria B + C</option>
+                <option>Categoria B + D</option>
               </select>
             </div>
           </div>
-          <div style="width:100%;margin-top:1rem;padding:0;">
-            <label style="display:block;font-size:.85rem;font-weight:600;margin-bottom:.4rem;">Sobre mim (breve apresentação)</label>
-            <textarea id="cv_sobre" rows="4" placeholder="Escreve uma breve apresentação sobre ti, os teus pontos fortes e o que procuras..."></textarea>
-          </div>
         </div>
+        </div>
+          <div style="margin-top:1.2rem;width:100%;">
+            <label style="font-size:.85rem;font-weight:600;color:#2d2d2d;display:block;margin-bottom:.4rem;">Sobre mim (breve apresentação)</label>
+            <textarea id="cv_sobre" rows="5" style="width:100%;min-height:120px;resize:vertical;font-size:.95rem;line-height:1.6;padding:.75rem 1rem;border:2px solid #e8e8e8;border-radius:10px;font-family:DM Sans,sans-serif;box-sizing:border-box;" placeholder="Escreve uma breve apresentação sobre ti, os teus pontos fortes e o que procuras..."></textarea>
+          </div>
 
-        <!-- ÁREA E DISPONIBILIDADE -->
+        <!-- SECÇÃO 2: ÁREA E DISPONIBILIDADE -->
         <div class="curriculo-secao">
           <div class="secao-titulo"><span>🎯</span> Área e Disponibilidade</div>
           <div class="form-grid">
@@ -135,10 +116,14 @@
               <label>Área de Interesse</label>
               <select id="cv_area">
                 <option value="">Seleciona...</option>
-                <option>Restauração</option><option>Hotelaria</option>
-                <option>Comércio</option><option>Indústria</option>
-                <option>Construção</option><option>Saúde & Bem-estar</option>
-                <option>Tecnologia</option><option>Outra</option>
+                <option>Restauração</option>
+                <option>Hotelaria</option>
+                <option>Comércio</option>
+                <option>Indústria</option>
+                <option>Construção</option>
+                <option>Saúde & Bem-estar</option>
+                <option>Tecnologia</option>
+                <option>Outra</option>
               </select>
             </div>
             <div class="form-grupo">
@@ -149,8 +134,10 @@
               <label>Tipo de Contrato</label>
               <select id="cv_contrato">
                 <option value="">Seleciona...</option>
-                <option>Tempo Inteiro</option><option>Tempo Parcial</option>
-                <option>Temporário</option><option>Estágio</option>
+                <option>Tempo Inteiro</option>
+                <option>Tempo Parcial</option>
+                <option>Temporário</option>
+                <option>Estágio</option>
                 <option>Indiferente</option>
               </select>
             </div>
@@ -158,14 +145,16 @@
               <label>Disponibilidade</label>
               <select id="cv_disponibilidade">
                 <option value="">Seleciona...</option>
-                <option>Imediata</option><option>1 semana</option>
-                <option>2 semanas</option><option>1 mês</option>
+                <option>Imediata</option>
+                <option>1 semana</option>
+                <option>2 semanas</option>
+                <option>1 mês</option>
               </select>
             </div>
           </div>
         </div>
 
-        <!-- ESCOLARIDADE -->
+        <!-- SECÇÃO 3: ESCOLARIDADE -->
         <div class="curriculo-secao">
           <div class="secao-titulo"><span>🎓</span> Escolaridade</div>
           <div class="form-grid">
@@ -173,10 +162,14 @@
               <label>Nível de Escolaridade</label>
               <select id="cv_escolaridade">
                 <option value="">Seleciona...</option>
-                <option>4º Ano</option><option>6º Ano</option>
-                <option>9º Ano</option><option>12º Ano</option>
-                <option>Curso Profissional</option><option>Licenciatura</option>
-                <option>Mestrado</option><option>Doutoramento</option>
+                <option>4º Ano</option>
+                <option>6º Ano</option>
+                <option>9º Ano</option>
+                <option>12º Ano</option>
+                <option>Curso Profissional</option>
+                <option>Licenciatura</option>
+                <option>Mestrado</option>
+                <option>Doutoramento</option>
               </select>
             </div>
             <div class="form-grupo">
@@ -194,7 +187,7 @@
           </div>
         </div>
 
-        <!-- EXPERIÊNCIA -->
+        <!-- SECÇÃO 4: EXPERIÊNCIA -->
         <div class="curriculo-secao">
           <div class="secao-titulo"><span>💼</span> Experiência Profissional</div>
           <div class="form-grid">
@@ -214,19 +207,21 @@
               <label>Anos de Experiência Total</label>
               <select id="cv_experiencia">
                 <option value="">Seleciona...</option>
-                <option>Sem experiência</option><option>Menos de 1 ano</option>
-                <option>1 a 2 anos</option><option>3 a 5 anos</option>
+                <option>Sem experiência</option>
+                <option>Menos de 1 ano</option>
+                <option>1 a 2 anos</option>
+                <option>3 a 5 anos</option>
                 <option>Mais de 5 anos</option>
               </select>
             </div>
           </div>
-          <div style="width:100%;margin-top:1rem;padding:0;">
-            <label style="display:block;font-size:.85rem;font-weight:600;margin-bottom:.4rem;">Descrição das funções desempenhadas</label>
-            <textarea id="cv_desc_exp" rows="4" placeholder="Descreve as tarefas e responsabilidades que tiveste..."></textarea>
+          <div style="margin-top:1rem;width:100%;padding:0 0.1rem">
+            <label>Descrição das funções desempenhadas</label>
+            <textarea id="cv_desc_exp" rows="3" placeholder="Descreve as tarefas e responsabilidades que tiveste..."></textarea>
           </div>
         </div>
 
-        <!-- COMPETÊNCIAS -->
+        <!-- SECÇÃO 5: COMPETÊNCIAS -->
         <div class="curriculo-secao">
           <div class="secao-titulo"><span>⭐</span> Competências e Línguas</div>
           <div class="form-grid">
@@ -249,9 +244,14 @@
           </div>
         </div>
 
+        <!-- BOTÃO GUARDAR -->
         <div class="curriculo-acoes">
-          <button type="submit" class="btn btn-primario btn-grande">💾 Guardar Currículo</button>
-          <button type="button" onclick="window.location.href='dashboard.html'" class="btn btn-secundario btn-grande">Ver Dashboard →</button>
+          <button type="submit" class="btn btn-primario btn-grande">
+            💾 Guardar Currículo
+          </button>
+          <button type="button" onclick="window.location.href='dashboard.html'" class="btn btn-secundario btn-grande">
+            Ver Dashboard →
+          </button>
         </div>
 
       </form>
