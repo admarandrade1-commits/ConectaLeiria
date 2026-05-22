@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Página não encontrada — ConectaLeiria</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .pagina-404 {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(160deg, #f8fdf9 0%, #ffffff 50%, #f0f9f4 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .pagina-404::before {
+      content: '404';
+      position: absolute;
+      font-family: var(--fonte-display);
+      font-size: 35vw;
+      font-weight: 900;
+      color: rgba(26,107,60,0.04);
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+    }
+    .erro-icone {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+      animation: float 3s ease-in-out infinite;
+    }
+    .erro-titulo {
+      font-family: var(--fonte-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--azul-noite);
+      margin-bottom: 1rem;
+    }
+    .erro-titulo span { color: var(--verde-escuro); }
+    .erro-sub {
+      font-size: 1.1rem;
+      color: var(--cinza-medio);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+    .erro-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .erro-links {
+      margin-top: 3rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .erro-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1.2rem 1.5rem;
+      background: white;
+      border-radius: var(--raio);
+      box-shadow: var(--sombra-suave);
+      text-decoration: none;
+      color: var(--cinza-escuro);
+      transition: var(--transicao);
+      min-width: 140px;
+      border: 2px solid transparent;
+    }
+    .erro-link:hover {
+      border-color: var(--verde-medio);
+      transform: translateY(-4px);
+      box-shadow: var(--sombra-media);
+    }
+    .erro-link-icone { font-size: 1.8rem; }
+    .erro-link-texto { font-size: 0.85rem; font-weight: 600; color: var(--verde-escuro); }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="pagina-404">
+    <div class="erro-icone">🗺️</div>
+    <h1 class="erro-titulo">Página <span>não encontrada</span></h1>
+    <p class="erro-sub">Parece que te perdeste pelo Distrito de Leiria! Esta página não existe ou foi movida.</p>
+    <div class="erro-btns">
+      <a href="index.html" class="btn btn-primario btn-grande">🏠 Voltar ao Início</a>
+      <a href="pages/candidato/registo.html" class="btn btn-secundario btn-grande">👤 Criar Conta</a>
+    </div>
+    <div class="erro-links">
+      <a href="pages/candidato/login.html" class="erro-link">
+        <span class="erro-link-icone">🔑</span>
+        <span class="erro-link-texto">Entrar</span>
+      </a>
+      <a href="pages/empresa/registo.html" class="erro-link">
+        <span class="erro-link-icone">🏢</span>
+        <span class="erro-link-texto">Sou Empresa</span>
+      </a>
+      <a href="index.html#areas" class="erro-link">
+        <span class="erro-link-icone">🎯</span>
+        <span class="erro-link-texto">Ver Áreas</span>
+      </a>
+      <a href="index.html#como-funciona" class="erro-link">
+        <span class="erro-link-icone">❓</span>
+        <span class="erro-link-texto">Como Funciona</span>
+      </a>
+    </div>
+    <div style="margin-top:3rem">
+      <a href="index.html" class="logo-texto">Conecta<span class="logo-verde">Leiria</span></a>
+    </div>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>
