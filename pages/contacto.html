@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto — ConectaLeiria</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body { padding-top: 72px; background: #f7f9f7; }
+    .pagina-hero {
+      background: linear-gradient(135deg, var(--verde-escuro), #0d4a27);
+      padding: 4rem 5%;
+      text-align: center;
+      color: white;
+    }
+    .pagina-hero h1 { color: white; margin-bottom: 0.8rem; }
+    .pagina-hero p { color: rgba(255,255,255,0.7); }
+    .contacto-container {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 2rem;
+    }
+    .contacto-info { display: flex; flex-direction: column; gap: 1.2rem; }
+    .info-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.8rem;
+      box-shadow: 0 4px 24px rgba(26,107,60,0.08);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .info-icone {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--verde-escuro), var(--verde-medio));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .info-titulo { font-weight: 700; color: var(--azul-noite); margin-bottom: 0.3rem; }
+    .info-texto { font-size: 0.88rem; color: var(--cinza-medio); line-height: 1.5; }
+    .contacto-form-wrap {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 24px rgba(26,107,60,0.08);
+    }
+    .contacto-form-wrap h2 {
+      font-family: var(--fonte-display);
+      color: var(--azul-noite);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .contacto-form-wrap p { color: var(--cinza-medio); margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .form-grupo { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
+    .form-grupo label { font-size: 0.85rem; font-weight: 600; color: var(--cinza-escuro); }
+    .form-grupo input, .form-grupo select, .form-grupo textarea {
+      padding: 0.75rem 1rem;
+      border: 2px solid #e8e8e8;
+      border-radius: 10px;
+      font-family: var(--fonte-corpo);
+      font-size: 0.95rem;
+      color: var(--cinza-escuro);
+      background: white;
+      transition: var(--transicao);
+      outline: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .form-grupo input:focus, .form-grupo select:focus, .form-grupo textarea:focus {
+      border-color: var(--verde-escuro);
+      box-shadow: 0 0 0 3px rgba(26,107,60,0.1);
+    }
+    .form-grupo textarea { resize: vertical; min-height: 130px; }
+    @media (max-width: 768px) {
+      .contacto-container { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <a class="navbar-logo" href="../index.html">
+      <span class="logo-texto">Conecta<span class="logo-verde">Leiria</span></span>
+    </a>
+    <div class="navbar-ctas">
+      <a href="../index.html" class="btn btn-secundario">← Voltar</a>
+    </div>
+  </nav>
+
+  <div class="pagina-hero">
+    <span class="section-label" style="color:rgba(255,255,255,0.6)">✦ Fala Connosco</span>
+    <h1>Contacto</h1>
+    <p>Tens alguma dúvida ou sugestão? Estamos aqui para ajudar!</p>
+  </div>
+
+  <div class="contacto-container">
+
+    <!-- INFO -->
+    <div class="contacto-info">
+      <div class="info-card">
+        <div class="info-icone">📧</div>
+        <div>
+          <div class="info-titulo">Email</div>
+          <div class="info-texto">geral@conectaleiria.pt<br>Respondemos em 24-48 horas</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icone">📍</div>
+        <div>
+          <div class="info-titulo">Localização</div>
+          <div class="info-texto">Distrito de Leiria<br>Nazaré, Portugal</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icone">🕐</div>
+        <div>
+          <div class="info-titulo">Horário de Suporte</div>
+          <div class="info-texto">Segunda a Sexta<br>9h00 — 18h00</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icone">🎓</div>
+        <div>
+          <div class="info-titulo">Projeto PAP</div>
+          <div class="info-texto">Escola Secundária da Nazaré<br>Projeto de Aptidão Profissional 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULÁRIO -->
+    <div class="contacto-form-wrap">
+      <h2>Envia-nos uma mensagem</h2>
+      <p>Preenche o formulário e entraremos em contacto contigo o mais breve possível.</p>
+
+      <form id="formContacto">
+        <div class="form-grupo">
+          <label>Nome Completo</label>
+          <input type="text" id="ct_nome" placeholder="O teu nome" required />
+        </div>
+        <div class="form-grupo">
+          <label>Email</label>
+          <input type="email" id="ct_email" placeholder="email@exemplo.com" required />
+        </div>
+        <div class="form-grupo">
+          <label>Assunto</label>
+          <select id="ct_assunto">
+            <option value="">Seleciona o assunto...</option>
+            <option>Dúvida sobre o site</option>
+            <option>Problema técnico</option>
+            <option>Sugestão de melhoria</option>
+            <option>Questão sobre privacidade</option>
+            <option>Parceria empresarial</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="form-grupo">
+          <label>Mensagem</label>
+          <textarea id="ct_mensagem" placeholder="Escreve aqui a tua mensagem..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primario btn-grande" style="width:100%;justify-content:center;">
+          📨 Enviar Mensagem
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="logo-texto" style="color:white">Conecta<span class="logo-verde">Leiria</span></div>
+      <div class="footer-texto">© 2026 ConectaLeiria · Todos os direitos reservados</div>
+      <div class="footer-links">
+        <a href="privacidade.html">Privacidade</a>
+        <a href="termos.html">Termos</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/app.js"></script>
+  <script>
+    document.getElementById('formContacto').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nome = document.getElementById('ct_nome').value;
+      const email = document.getElementById('ct_email').value;
+      const assunto = document.getElementById('ct_assunto').value;
+      const mensagem = document.getElementById('ct_mensagem').value;
+
+      if (!nome || !email || !mensagem) {
+        mostrarToast('Preenche todos os campos obrigatórios!', 'erro');
+        return;
+      }
+
+      mostrarToast('Mensagem enviada com sucesso! Entraremos em contacto em breve. 📧');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
