@@ -118,3 +118,25 @@
   box-sizing: border-box !important;
   display: block !important;
 }
+
+/* TEXTAREA LARGO */
+.textarea-largo {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 110px !important;
+  padding: 0.75rem 1rem !important;
+  border: 2px solid #e8e8e8 !important;
+  border-radius: 10px !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+  resize: vertical !important;
+  box-sizing: border-box !important;
+  color: #2d2d2d !important;
+  background: white !important;
+  overflow-x: hidden !important;
+  word-break: break-word !important;
+  white-space: pre-wrap !important;
+}
