@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapa do Distrito — ConectaLeiria</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body { padding-top: 72px; background: #f7f9f7; }
+    .mapa-hero {
+      background: linear-gradient(135deg, var(--verde-escuro), #0d4a27);
+      padding: 4rem 5%;
+      text-align: center;
+      color: white;
+    }
+    .mapa-hero h1 { color: white; margin-bottom: 0.8rem; }
+    .mapa-hero p { color: rgba(255,255,255,0.7); font-size: 1.1rem; }
+    .mapa-container {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 5%;
+    }
+    .concelhos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+    .concelho-card {
+      background: white;
+      border-radius: var(--raio);
+      padding: 1.5rem;
+      box-shadow: var(--sombra-suave);
+      border: 2px solid transparent;
+      transition: var(--transicao);
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+    .concelho-card:hover {
+      border-color: var(--verde-medio);
+      transform: translateY(-4px);
+      box-shadow: var(--sombra-media);
+    }
+    .concelho-emoji { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+    .concelho-nome {
+      font-family: var(--fonte-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--azul-noite);
+      margin-bottom: 0.3rem;
+    }
+    .concelho-info { font-size: 0.82rem; color: var(--cinza-medio); margin-bottom: 0.8rem; }
+    .concelho-stats {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .concelho-stat {
+      background: rgba(26,107,60,0.08);
+      color: var(--verde-escuro);
+      padding: 0.25rem 0.7rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .mapa-svg-wrap {
+      background: white;
+      border-radius: var(--raio-grande);
+      padding: 2rem;
+      box-shadow: var(--sombra-suave);
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+    .mapa-svg-wrap h2 {
+      font-family: var(--fonte-display);
+      color: var(--azul-noite);
+      margin-bottom: 1.5rem;
+    }
+    .distrito-mapa {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.8rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .hex {
+      background: linear-gradient(135deg, var(--verde-escuro), var(--verde-medio));
+      border-radius: 12px;
+      padding: 1rem 0.5rem;
+      text-align: center;
+      color: white;
+      cursor: pointer;
+      transition: var(--transicao);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .hex:hover {
+      transform: scale(1.08);
+      box-shadow: var(--sombra-media);
+    }
+    .hex .hex-emoji { font-size: 1.4rem; display: block; margin-bottom: 0.3rem; }
+    .hex.destaque {
+      background: linear-gradient(135deg, var(--dourado), var(--dourado-claro));
+      color: var(--azul-noite);
+    }
+    .stats-distrito {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+    .stat-card {
+      background: white;
+      border-radius: var(--raio);
+      padding: 1.5rem;
+      box-shadow: var(--sombra-suave);
+      text-align: center;
+      border-top: 4px solid var(--verde-escuro);
+    }
+    .stat-num {
+      font-family: var(--fonte-display);
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--verde-escuro);
+    }
+    .stat-label { font-size: 0.88rem; color: var(--cinza-medio); margin-top: 0.3rem; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <a class="navbar-logo" href="../index.html">
+      <span class="logo-texto">Conecta<span class="logo-verde">Leiria</span></span>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="../index.html">Início</a></li>
+      <li><a href="../index.html#areas">Áreas</a></li>
+      <li><a href="mapa.html" style="color:var(--verde-escuro)">Mapa</a></li>
+    </ul>
+    <div class="navbar-ctas">
+      <a href="candidato/login.html" class="btn btn-secundario">Entrar</a>
+      <a href="candidato/registo.html" class="btn btn-primario">Criar Conta</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="mapa-hero">
+    <span class="section-label" style="color:rgba(255,255,255,0.6)">✦ Distrito de Leiria</span>
+    <h1>Oportunidades em todo o Distrito</h1>
+    <p>Explora os concelhos e descobre onde estão as melhores oportunidades de emprego.</p>
+  </div>
+
+  <div class="mapa-container">
+
+    <!-- ESTATÍSTICAS -->
+    <div class="stats-distrito">
+      <div class="stat-card">
+        <div class="stat-num" id="totalCandidatos">0</div>
+        <div class="stat-label">Candidatos registados</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="totalEmpresas">0</div>
+        <div class="stat-label">Empresas registadas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">12</div>
+        <div class="stat-label">Concelhos cobertos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">8</div>
+        <div class="stat-label">Áreas de emprego</div>
+      </div>
+    </div>
+
+    <!-- MAPA VISUAL -->
+    <div class="mapa-svg-wrap">
+      <h2>🗺️ Distrito de Leiria</h2>
+      <div class="distrito-mapa">
+        <div class="hex destaque" onclick="filtrarConcelho('Nazaré')">
+          <span class="hex-emoji">🏖️</span>Nazaré
+        </div>
+        <div class="hex" onclick="filtrarConcelho('Alcobaça')">
+          <span class="hex-emoji">🌊</span>Alcobaça
+        </div>
+        <div class="hex" onclick="filtrarConcelho('Caldas da Rainha')">
+          <span class="hex-emoji">🌡️</span>Caldas da Rainha
+        </div>
+        <div class="hex" onclick="filtrarConcelho('Óbidos')">
+          <span class="hex-emoji">⛵</span>Óbidos
+        </div>
+        <div class="hex destaque" onclick="filtrarConcelho('Leiria')">
+          <span class="hex-emoji">🏰</span>Leiria
+        </div>
+        <div class="hex" onclick="filtrarConcelho('Batalha')">
+          <span class="hex-emoji">🏘️</span>Batalha
+        </div>
+        <div class="hex" onclick="filtrarConcelho('Marinha Grande')">
+          <span class="hex-emoji">🏭</span>Marinha Grande
+        </div>
+        <div class="hex" onclick="filtrarConcelho('Peniche')">
+          <span class="hex-emoji">🐟</span>Peniche
+        </div>
+        <div class="hex" onclick="filtrarConcelho('Pombal')">
+          <span class="hex-emoji">🌾</span>Pombal
+        </div>
+        <div class="hex" onclick="filtrarConcelho('Ansião')">
+          <span class="hex-emoji">🌳</span>Ansião
+        </div>
+        <div class="hex" onclick="filtrarConcelho('Pedrógão Grande')">
+          <span class="hex-emoji">🌲</span>Pedrógão Grande
+        </div>
+        <div class="hex" onclick="filtrarConcelho('Figueiró dos Vinhos')">
+          <span class="hex-emoji">🏞️</span>Figueiró dos Vinhos
+        </div>
+      </div>
+      <p style="margin-top:1.5rem;font-size:.85rem;color:var(--cinza-medio)">
+        Clica num concelho para ver os candidatos dessa zona
+      </p>
+    </div>
+
+    <!-- CONCELHOS -->
+    <div class="section-header">
+      <span class="section-label">✦ Todos os Concelhos</span>
+      <h2 class="section-titulo" id="tituloLista">Candidatos por Concelho</h2>
+    </div>
+
+    <div class="concelhos-grid" id="concelhosList">
+      <!-- preenchido pelo JS -->
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="logo-texto" style="color:white">Conecta<span class="logo-verde">Leiria</span></div>
+      <div class="footer-texto">© 2025 ConectaLeiria · Distrito de Leiria</div>
+      <div class="footer-links">
+        <a href="../index.html">Início</a>
+        <a href="candidato/registo.html">Candidatos</a>
+        <a href="empresa/registo.html">Empresas</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/demo-dados.js"></script>
+  <script>
+    const concelhos = [
+      { nome: 'Nazaré', emoji: '🏖️', desc: 'Vila piscatória junto ao Atlântico' },
+      { nome: 'Leiria', emoji: '🏰', desc: 'Capital do Distrito, cidade histórica' },
+      { nome: 'Alcobaça', emoji: '🌊', desc: 'Famosa pelo Mosteiro Património Mundial' },
+      { nome: 'Caldas da Rainha', emoji: '🌡️', desc: 'Cidade das Caldas e da cerâmica' },
+      { nome: 'Marinha Grande', emoji: '🏭', desc: 'Capital do vidro em Portugal' },
+      { nome: 'Pombal', emoji: '🌾', desc: 'Cidade do Marquês de Pombal' },
+      { nome: 'Batalha', emoji: '🏘️', desc: 'Lar do Mosteiro da Batalha' },
+      { nome: 'Peniche', emoji: '🐟', desc: 'Porto de pesca na Península' },
+      { nome: 'Óbidos', emoji: '⛵', desc: 'Vila medieval preservada' },
+      { nome: 'Pedrógão Grande', emoji: '🌲', desc: 'Rodeada de floresta e natureza' },
+      { nome: 'Figueiró dos Vinhos', emoji: '🏞️', desc: 'Paisagens deslumbrantes do interior' },
+      { nome: 'Ansião', emoji: '🌳', desc: 'Localidade tranquila do interior' },
+    ];
+
+    function renderConcelhos(filtro) {
+      const candidatos = DB.getCandidatos();
+      const lista = document.getElementById('concelhosList');
+
+      const concelhosFiltrados = filtro
+        ? concelhos.filter(c => c.nome === filtro)
+        : concelhos;
+
+      lista.innerHTML = concelhosFiltrados.map(c => {
+        const cv_count = candidatos.filter(cand => {
+          const cv = JSON.parse(localStorage.getItem('cl_cv_' + cand.id) || '{}');
+          return (cv.concelho || cand.concelho) === c.nome;
+        }).length;
+
+        return `
+          <div class="concelho-card" onclick="filtrarConcelho('${c.nome}')">
+            <span class="concelho-emoji">${c.emoji}</span>
+            <div class="concelho-nome">${c.nome}</div>
+            <div class="concelho-info">${c.desc}</div>
+            <div class="concelho-stats">
+              <span class="concelho-stat">👥 ${cv_count} candidato${cv_count !== 1 ? 's' : ''}</span>
+            </div>
+          </div>`;
+      }).join('');
+
+      document.getElementById('totalCandidatos').textContent = candidatos.length;
+      document.getElementById('totalEmpresas').textContent = DB.getEmpresas().length;
+    }
+
+    function filtrarConcelho(nome) {
+      document.getElementById('tituloLista').textContent = '📍 Candidatos em ' + nome;
+      renderConcelhos(nome);
+      document.getElementById('concelhosList').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    window.filtrarConcelho = filtrarConcelho;
+    renderConcelhos();
+  </script>
+</body>
+</html>
