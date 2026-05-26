@@ -1,4 +1,4 @@
-// CONECTALEIRIA — Assistente Virtual Leia
+// CONECTALEIRIA — Assistente Virtual Lili
 
 const respostas = {
   // REGISTO
@@ -93,7 +93,7 @@ const respostas = {
   },
   'ola|olá|bom dia|boa tarde|boa noite|hi|hello': {
     resposta: `Olá! 👋 Bem-vindo ao ConectaLeiria!<br><br>
-    Sou a <strong>Leia</strong>, a tua assistente virtual! Posso ajudar-te com:<br><br>
+    Sou a <strong>Lili</strong>, a tua assistente virtual! Posso ajudar-te com:<br><br>
     🔍 Como encontrar emprego<br>
     🏢 Como registar a tua empresa<br>
     📍 Concelhos e áreas disponíveis<br>
@@ -141,12 +141,12 @@ let assistenteAberto = false;
 function criarAssistente() {
   const div = document.createElement('div');
   div.innerHTML = `
-    <button class="assistente-btn" id="assistenteBtn" title="Assistente Virtual Leia">🤖</button>
+    <button class="assistente-btn" id="assistenteBtn" title="Assistente Virtual Lili">🤖</button>
     <div class="assistente-janela" id="assistenteJanela">
       <div class="assistente-header">
         <div class="assistente-avatar">🤖</div>
         <div class="assistente-header-info">
-          <div class="assistente-nome">Leia — Assistente ConectaLeiria</div>
+          <div class="assistente-nome">Lili — Assistente ConectaLeiria</div>
           <div class="assistente-status">Online agora</div>
         </div>
         <button class="assistente-fechar" id="assistenteFechar">✕</button>
@@ -154,7 +154,7 @@ function criarAssistente() {
       <div class="assistente-mensagens" id="assistenteMensagens">
         <div class="msg msg-ia">
           <div class="msg-avatar">🤖</div>
-          <div class="msg-balao">Olá! 👋 Sou a <strong>Leia</strong>, assistente do ConectaLeiria!<br><br>Como posso ajudar-te hoje? 😊</div>
+          <div class="msg-balao">Olá! 👋 Sou a <strong>Lili</strong>, assistente do ConectaLeiria!<br><br>Como posso ajudar-te hoje? 😊</div>
         </div>
       </div>
       <div class="assistente-sugestoes">
