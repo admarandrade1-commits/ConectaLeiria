@@ -60,3 +60,52 @@ document.getElementById('formCurriculo').addEventListener('submit', function(e) 
   mostrarToast('Currículo guardado com sucesso! 💾');
   atualizarProgresso();
 });
+
+// FOTO DE PERFIL
+const fotoInput = document.getElementById('fotoInput');
+if (fotoInput) {
+  // Carregar foto guardada
+  const user = DB.getUtilizador();
+  if (user) {
+    const fotoGuardada = localStorage.getItem('cl_foto_' + user.id);
+    if (fotoGuardada) {
+      document.getElementById('fotoEmoji').style.display = 'none';
+      const img = document.createElement('img');
+      img.src = fotoGuardada;
+      document.getElementById('fotoPreview').appendChild(img);
+    }
+  }
+
+  // Quando escolhe foto
+  fotoInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      mostrarToast('A foto é muito grande! Máximo 2MB.', 'erro');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const preview = document.getElementById('fotoPreview');
+      document.getElementById('fotoEmoji').style.display = 'none';
+      
+      // Remover img anterior
+      const imgAnterior = preview.querySelector('img');
+      if (imgAnterior) imgAnterior.remove();
+
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      preview.appendChild(img);
+
+      // Guardar no localStorage
+      const user = DB.getUtilizador();
+      if (user) {
+        localStorage.setItem('cl_foto_' + user.id, e.target.result);
+        mostrarToast('Foto atualizada com sucesso! 📸');
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+}
