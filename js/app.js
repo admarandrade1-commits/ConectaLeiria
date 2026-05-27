@@ -55,3 +55,25 @@ function mostrarToast(msg, tipo = 'sucesso') {
   setTimeout(() => { t.style.transform = 'translateX(120%)'; setTimeout(() => t.remove(), 400); }, 3500);
 }
 window.mostrarToast = mostrarToast;
+// BOTÃO INSTALAR PWA
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // Mostrar botão
+  const btn = document.getElementById('btnInstalarApp');
+  if (btn) {
+    btn.style.display = 'flex';
+    btn.addEventListener('click', async () => {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        mostrarToast('App instalada com sucesso! 📱');
+        btn.style.display = 'none';
+      }
+      deferredPrompt = null;
+    });
+  }
+});
