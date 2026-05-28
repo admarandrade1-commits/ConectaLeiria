@@ -93,3 +93,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+// Verificar sessão na página inicial
+document.addEventListener('DOMContentLoaded', () => {
+  const user = DB.getUtilizador();
+  const isIndex = window.location.pathname.endsWith('/') || 
+                  window.location.pathname.includes('index.html');
+  
+  if (user && isIndex) {
+    const ctas = document.querySelector('.navbar-ctas');
+    if (ctas) {
+      const nome = user.nome ? user.nome.split(' ')[0] : 'Utilizador';
+      const dashLink = user.tipo === 'candidato' 
+        ? 'pages/candidato/dashboard.html' 
+        : 'pages/empresa/dashboard.html';
+      ctas.innerHTML = `
+        <span class="navbar-user">👤 ${nome}</span>
+        <a href="${dashLink}" class="btn btn-primario">Dashboard</a>
+        <button onclick="DB.logout()" class="btn btn-secundario">Sair</button>
+      `;
+    }
+  }
+});
