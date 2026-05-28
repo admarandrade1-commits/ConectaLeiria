@@ -115,3 +115,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+// Trocar logo por casinha quando logado
+document.addEventListener('DOMContentLoaded', () => {
+  const user = DB.getUtilizador();
+  if (!user) return;
+  
+  const logo = document.querySelector('.navbar-logo');
+  if (!logo) return;
+
+  const dashLink = user.tipo === 'candidato' 
+    ? 'pages/candidato/dashboard.html' 
+    : 'pages/empresa/dashboard.html';
+
+  // Se estiver na página inicial
+  const isIndex = window.location.pathname.endsWith('/') || 
+                  window.location.pathname.includes('index.html');
+
+  if (isIndex) {
+    logo.href = dashLink;
+    logo.innerHTML = '<span style="font-size:1.8rem;">🏠</span>';
+  }
+});
