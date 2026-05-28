@@ -40,7 +40,7 @@ const DB = {
     if (user) { localStorage.setItem('cl_utilizador', JSON.stringify({ ...user, tipo })); return user; }
     return null;
   },
-  logout: () => { localStorage.removeItem('cl_utilizador'); window.location.href = '/index.html'; },
+  logout: () => { localStorage.removeItem('cl_utilizador'); window.location.href = "/ConectaLeiria/index.html";; },
   getUtilizador: () => JSON.parse(localStorage.getItem('cl_utilizador') || 'null')
 };
 window.DB = DB;
@@ -75,5 +75,21 @@ window.addEventListener('beforeinstallprompt', (e) => {
       }
       deferredPrompt = null;
     });
+  }
+});
+
+// Verificar se utilizador já está logado na página inicial
+document.addEventListener('DOMContentLoaded', () => {
+  const user = DB.getUtilizador();
+  if (user && window.location.pathname.includes('index.html') || 
+      user && window.location.pathname.endsWith('/ConectaLeiria/')) {
+    const ctas = document.querySelector('.navbar-ctas');
+    if (ctas) {
+      ctas.innerHTML = `
+        <span class="navbar-user">👤 ${user.nome ? user.nome.split(' ')[0] : user.nome}</span>
+        <a href="/ConectaLeiria/pages/${user.tipo}/dashboard.html" class="btn btn-primario">Dashboard</a>
+        <button onclick="DB.logout()" class="btn btn-secundario">Sair</button>
+      `;
+    }
   }
 });
