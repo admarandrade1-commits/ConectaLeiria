@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (logo) {
       logo.removeAttribute('href');
       logo.style.cursor = 'default';
-      logo.innerHTML = '<span style="font-size:1.8rem;">🏠</span>';
+      logo.innerHTML = '<span class="logo-texto">Conecta<span class="logo-verde">Leiria</span></span>';
     }
   }
 });
