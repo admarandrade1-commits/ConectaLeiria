@@ -116,24 +116,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Trocar logo por casinha quando logado
+
+
+// Mostrar casinha quando logado (não clicável)
 document.addEventListener('DOMContentLoaded', () => {
   const user = DB.getUtilizador();
-  if (!user) return;
-  
-  const logo = document.querySelector('.navbar-logo');
-  if (!logo) return;
-
-  const dashLink = user.tipo === 'candidato' 
-    ? 'pages/candidato/dashboard.html' 
-    : 'pages/empresa/dashboard.html';
-
-  // Se estiver na página inicial
   const isIndex = window.location.pathname.endsWith('/') || 
                   window.location.pathname.includes('index.html');
-
-  if (isIndex) {
-    logo.href = dashLink;
-    logo.innerHTML = '<span style="font-size:1.8rem;">🏠</span>';
+  
+  if (user && isIndex) {
+    const logo = document.querySelector('.navbar-logo');
+    if (logo) {
+      logo.removeAttribute('href');
+      logo.style.cursor = 'default';
+      logo.innerHTML = '<span style="font-size:1.8rem;">🏠</span>';
+    }
   }
 });
