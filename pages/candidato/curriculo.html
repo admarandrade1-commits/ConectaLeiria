@@ -14,28 +14,30 @@
   <link rel="stylesheet" href="../../css/dashboard.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    .textarea-largo {
+    /* FORÇAR TEXTAREA A SER HORIZONTAL */
+    #cv_sobre, #cv_desc_exp {
       display: block !important;
-      width: 100% !important;
-      min-width: 100% !important;
+      width: calc(100% - 2px) !important;
+      min-width: 0 !important;
       max-width: 100% !important;
-      min-height: 110px !important;
+      min-height: 120px !important;
+      height: auto !important;
       padding: 0.75rem 1rem !important;
       border: 2px solid #e8e8e8 !important;
       border-radius: 10px !important;
-      font-family: 'DM Sans', sans-serif !important;
+      font-family: "DM Sans", sans-serif !important;
       font-size: 0.95rem !important;
       line-height: 1.6 !important;
       resize: vertical !important;
       box-sizing: border-box !important;
       color: #2d2d2d !important;
       background: white !important;
-      margin-top: 0.4rem !important;
       overflow-x: hidden !important;
-      white-space: pre-wrap !important;
-      word-wrap: break-word !important;
+      overflow-y: auto !important;
+      writing-mode: horizontal-tb !important;
+      direction: ltr !important;
     }
-    .textarea-largo:focus {
+    #cv_sobre:focus, #cv_desc_exp:focus {
       border-color: #1a6b3c !important;
       outline: none !important;
       box-shadow: 0 0 0 3px rgba(26,107,60,0.1) !important;
@@ -47,9 +49,6 @@
       color: #2d2d2d !important;
       margin-top: 1.2rem !important;
       margin-bottom: 0.4rem !important;
-    }
-    .curriculo-secao {
-      overflow: visible !important;
     }
   </style>
 </head>
