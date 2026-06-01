@@ -208,7 +208,6 @@
 
 /* TEXTAREA FIX */
 #cv_sobre, #cv_desc_exp {
-  all: unset !important;
   display: block !important;
   width: 100% !important;
   min-height: 120px !important;
