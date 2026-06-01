@@ -17,31 +17,39 @@
     .textarea-largo {
       display: block !important;
       width: 100% !important;
-      min-height: 110px;
-      padding: 0.75rem 1rem;
-      border: 2px solid #e8e8e8;
-      border-radius: 10px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      resize: vertical;
-      box-sizing: border-box;
-      color: #2d2d2d;
-      background: white;
-      margin-top: 0.4rem;
+      min-width: 100% !important;
+      max-width: 100% !important;
+      min-height: 110px !important;
+      padding: 0.75rem 1rem !important;
+      border: 2px solid #e8e8e8 !important;
+      border-radius: 10px !important;
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 0.95rem !important;
+      line-height: 1.6 !important;
+      resize: vertical !important;
+      box-sizing: border-box !important;
+      color: #2d2d2d !important;
+      background: white !important;
+      margin-top: 0.4rem !important;
+      overflow-x: hidden !important;
+      white-space: pre-wrap !important;
+      word-wrap: break-word !important;
     }
     .textarea-largo:focus {
-      border-color: #1a6b3c;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(26,107,60,0.1);
+      border-color: #1a6b3c !important;
+      outline: none !important;
+      box-shadow: 0 0 0 3px rgba(26,107,60,0.1) !important;
     }
     .label-largo {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #2d2d2d;
-      margin-top: 1.2rem;
-      margin-bottom: 0.4rem;
+      display: block !important;
+      font-size: 0.85rem !important;
+      font-weight: 600 !important;
+      color: #2d2d2d !important;
+      margin-top: 1.2rem !important;
+      margin-bottom: 0.4rem !important;
+    }
+    .curriculo-secao {
+      overflow: visible !important;
     }
   </style>
 </head>
@@ -150,7 +158,7 @@
             </div>
           </div>
           <label class="label-largo">Sobre mim (breve apresentação)</label>
-          <textarea id="cv_sobre" class="textarea-largo" placeholder="Escreve uma breve apresentação sobre ti, os teus pontos fortes e o que procuras..."></textarea>
+          <textarea id="cv_sobre" style="display:block;width:100%;min-height:110px;padding:.75rem 1rem;border:2px solid #e8e8e8;border-radius:10px;font-family:DM Sans,sans-serif;font-size:.95rem;line-height:1.6;resize:vertical;box-sizing:border-box;color:#2d2d2d;background:white;" placeholder="Escreve uma breve apresentação sobre ti, os teus pontos fortes e o que procuras..."></textarea>
         </div>
 
         <!-- ÁREA E DISPONIBILIDADE -->
@@ -261,7 +269,7 @@
             </div>
           </div>
           <label class="label-largo">Descrição das funções desempenhadas</label>
-          <textarea id="cv_desc_exp" class="textarea-largo" placeholder="Descreve as tarefas e responsabilidades que tiveste..."></textarea>
+          <textarea id="cv_desc_exp" style="display:block;width:100%;min-height:110px;padding:.75rem 1rem;border:2px solid #e8e8e8;border-radius:10px;font-family:DM Sans,sans-serif;font-size:.95rem;line-height:1.6;resize:vertical;box-sizing:border-box;color:#2d2d2d;background:white;" placeholder="Descreve as tarefas e responsabilidades que tiveste..."></textarea>
         </div>
 
         <!-- COMPETÊNCIAS -->
