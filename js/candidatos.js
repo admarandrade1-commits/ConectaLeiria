@@ -1,10 +1,22 @@
 let todosCandidatos = [];
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const user = DB.getUtilizador();
   if (!user || user.tipo !== 'empresa') { window.location.href = 'login.html'; return; }
   document.getElementById('nomeUtilizador').textContent = '🏢 ' + user.nome;
-  todosCandidatos = DB.getCandidatos();
+  
+  // Carregar candidatos do Supabase
+  try {
+    const { data, error } = await window.db.from('candidatos').select('*');
+    if (!error && data && data.length > 0) {
+      todosCandidatos = data;
+    } else {
+      todosCandidatos = DB.getCandidatos();
+    }
+  } catch(e) {
+    todosCandidatos = DB.getCandidatos();
+  }
+  
   renderCandidatos(todosCandidatos);
 });
 
