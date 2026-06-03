@@ -27,7 +27,11 @@ function renderCandidatos(lista) {
         <span class="candidato-tag">📍 ${cv.concelho || c.concelho || '—'}</span>
         <span class="candidato-tag">💼 ${cv.experiencia || 'Não indicada'}</span>
       </div>
-      <button class="candidato-btn">Ver Currículo Completo →</button>
+      <button class="candidato-btn" onclick="verCurriculo(${c.id})">Ver Currículo Completo →</button>
+      <div class="candidato-acoes">
+        <button class="btn-interesse" onclick="marcarInteresse(${c.id}, 'interesse', this)">⭐ Tenho Interesse</button>
+        <button class="btn-contactar" onclick="marcarInteresse(${c.id}, 'contactar', this)">📞 Contactar</button>
+      </div>
     </div>`;
   }).join('');
 }
@@ -120,6 +124,19 @@ async function marcarInteresse(candidato_id, estado, btn) {
     ? '<span style="color:#c9a84c;font-weight:700;font-size:.85rem;">⭐ Interesse marcado!</span>'
     : '<span style="color:#1a6b3c;font-weight:700;font-size:.85rem;">📞 Candidato será contactado!</span>';
   
+  mostrarToast(estado === 'interesse' ? '⭐ Interesse marcado!' : '📞 Candidato será contactado!');
+}
+window.marcarInteresse = marcarInteresse;
+
+
+async function marcarInteresse(candidato_id, estado, btn) {
+  const user = DB.getUtilizador();
+  if (!user) return;
+  await Candidaturas.marcarInteresse(user.id, candidato_id, estado);
+  const acoes = btn.parentElement;
+  acoes.innerHTML = estado === 'interesse'
+    ? '<span style="color:#c9a84c;font-weight:700;font-size:.85rem;">⭐ Interesse marcado!</span>'
+    : '<span style="color:#1a6b3c;font-weight:700;font-size:.85rem;">📞 Candidato será contactado!</span>';
   mostrarToast(estado === 'interesse' ? '⭐ Interesse marcado!' : '📞 Candidato será contactado!');
 }
 window.marcarInteresse = marcarInteresse;
