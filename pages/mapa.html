@@ -126,6 +126,38 @@
       color: var(--verde-escuro);
     }
     .stat-label { font-size: 0.88rem; color: var(--cinza-medio); margin-top: 0.3rem; }
+
+    .modal-concelho {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      backdrop-filter: blur(4px);
+    }
+    .modal-concelho.aberto { display: flex; }
+    .modal-concelho-caixa {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+      position: relative;
+      animation: fadeInUp 0.3s ease;
+    }
+    .modal-concelho-emoji { font-size: 3rem; margin-bottom: 0.5rem; display: block; }
+    .modal-concelho-nome { font-family: var(--fonte-display); font-size: 1.8rem; font-weight: 900; color: var(--azul-noite); margin-bottom: 0.3rem; }
+    .modal-concelho-desc { color: var(--cinza-medio); font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .modal-concelho-areas-titulo { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--verde-escuro); font-weight: 700; margin-bottom: 0.8rem; }
+    .modal-concelho-areas { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.5rem; }
+    .modal-area-tag { background: rgba(26,107,60,0.08); color: #1a6b3c; border: 1px solid rgba(26,107,60,0.2); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; }
+    .modal-candidatos { background: var(--cinza-claro); border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem; }
+    .modal-fechar { position: absolute; top: 1rem; right: 1rem; background: var(--cinza-claro); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+    .modal-fechar:hover { background: #e0e0e0; }
   </style>
 </head>
 <body>
@@ -292,13 +324,51 @@
     }
 
     function filtrarConcelho(nome) {
-      document.getElementById('tituloLista').textContent = '📍 Candidatos em ' + nome;
-      renderConcelhos(nome);
-      document.getElementById('concelhosList').scrollIntoView({ behavior: 'smooth' });
+      const c = concelhos.find(x => x.nome === nome);
+      if (!c) return;
+      const candidatos = DB.getCandidatos();
+      const cv_count = candidatos.filter(cand => {
+        const cv = JSON.parse(localStorage.getItem('cl_cv_' + cand.id) || '{}');
+        return (cv.concelho || cand.concelho) === nome;
+      }).length;
+
+      document.getElementById('modalEmoji').textContent = c.emoji;
+      document.getElementById('modalNome').textContent = c.nome;
+      document.getElementById('modalDesc').textContent = c.desc;
+      document.getElementById('modalCandidatosNum').textContent = cv_count + ' candidato' + (cv_count !== 1 ? 's' : '');
+      document.getElementById('modalAreas').innerHTML = c.areas ? c.areas.map(a => `<span class="modal-area-tag">${a}</span>`).join('') : '';
+      document.getElementById('modalConcelho').classList.add('aberto');
+      document.body.style.overflow = 'hidden';
     }
+
+    function fecharModalConcelho() {
+      document.getElementById('modalConcelho').classList.remove('aberto');
+      document.body.style.overflow = '';
+    }
+    window.fecharModalConcelho = fecharModalConcelho;
 
     window.filtrarConcelho = filtrarConcelho;
     renderConcelhos();
   </script>
+
+  <!-- MODAL CONCELHO -->
+  <div class="modal-concelho" id="modalConcelho" onclick="if(event.target===this)fecharModalConcelho()">
+    <div class="modal-concelho-caixa">
+      <button class="modal-fechar" onclick="fecharModalConcelho()">✕</button>
+      <span class="modal-concelho-emoji" id="modalEmoji"></span>
+      <div class="modal-concelho-nome" id="modalNome"></div>
+      <div class="modal-concelho-desc" id="modalDesc"></div>
+      <div class="modal-concelho-areas-titulo">🎯 Áreas de Emprego mais Comuns</div>
+      <div class="modal-concelho-areas" id="modalAreas"></div>
+      <div class="modal-candidatos">
+        <span style="font-size:1.5rem;">👥</span>
+        <div>
+          <div style="font-weight:700;color:var(--azul-noite)" id="modalCandidatosNum"></div>
+          <div style="font-size:0.82rem;color:var(--cinza-medio)">candidatos disponíveis neste concelho</div>
+        </div>
+      </div>
+      <a href="/ConectaLeiria/pages/candidato/registo.html" class="btn btn-primario" style="width:100%;justify-content:center;display:flex;">🎯 Procurar Emprego Aqui</a>
+    </div>
+  </div>
 </body>
 </html>
