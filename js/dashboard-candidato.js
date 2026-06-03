@@ -7,6 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('areaUser').textContent = user.area || '—';
   document.getElementById('numEmpresas').textContent = DB.getEmpresas().length;
   const cv = JSON.parse(localStorage.getItem('cl_cv_' + user.id) || '{}');
+  
+  // Mostrar estado da candidatura
+  const estado = Candidaturas.getEstado(user.id);
+  const estadoDiv = document.createElement('div');
+  estadoDiv.style.cssText = 'background:white;border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:0 4px 24px rgba(26,107,60,.08);display:flex;align-items:center;gap:1rem;';
+  estadoDiv.innerHTML = `
+    <div style="width:52px;height:52px;border-radius:50%;background:${estado.cor}20;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">${estado.texto.split(' ')[0]}</div>
+    <div>
+      <div style="font-weight:700;color:#1a1a2e;font-size:1rem;">${estado.texto}</div>
+      <div style="font-size:0.82rem;color:#666;margin-top:2px;">Estado do teu currículo na plataforma</div>
+    </div>
+  `;
+  document.querySelector('.dash-main').insertBefore(estadoDiv, document.querySelector('.dash-cards'));
   if (cv.nome) {
     document.getElementById('statusCurriculo').textContent = 'Completo ✅';
     const campos = ['nome','email','telefone','concelho','sobre','area','funcao','escolaridade','experiencia','competencias'];

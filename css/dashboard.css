@@ -223,3 +223,44 @@
   resize: vertical !important;
   overflow: auto !important;
 }
+
+/* BOTÕES DE INTERESSE */
+.candidato-acoes {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+}
+.btn-interesse {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 2px solid #c9a84c;
+  background: transparent;
+  color: #c9a84c;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-interesse:hover, .btn-interesse.ativo {
+  background: #c9a84c;
+  color: white;
+}
+.btn-contactar {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 2px solid #1a6b3c;
+  background: transparent;
+  color: #1a6b3c;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-contactar:hover {
+  background: #1a6b3c;
+  color: white;
+}
