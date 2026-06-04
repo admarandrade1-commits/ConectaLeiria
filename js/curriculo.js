@@ -58,11 +58,11 @@ document.getElementById('formCurriculo').addEventListener('submit', async functi
   // Guardar no Supabase
   try {
     if (window.db) {
-      const { data: existing } = await window.db.from('curriculos').select('id').eq('candidato_id', user.id).single();
+      const { data: existing } = await window.db.from('curriculos').select('id').eq('id_da_caminha', user.id).single();
       if (existing) {
-        await window.db.from('curriculos').update({...cv, updated_at: new Date().toISOString()}).eq('candidato_id', user.id);
+        await window.db.from('curriculos').update({...cv, updated_at: new Date().toISOString()}).eq('id_da_caminha', user.id);
       } else {
-        await window.db.from('curriculos').insert([{candidato_id: user.id, ...cv}]);
+        await window.db.from('curriculos').insert([{id_da_caminha: user.id, ...cv}]);
       }
     }
   } catch(e) { console.log('Supabase erro:', e); }
