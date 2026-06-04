@@ -23,7 +23,7 @@ function atualizarProgresso() {
   document.getElementById('progressoPercent').textContent = pct + '%';
 }
 
-document.getElementById('formCurriculo').addEventListener('submit', function(e) {
+document.getElementById('formCurriculo').addEventListener('submit', async function(e) {
   e.preventDefault();
   const user = DB.getUtilizador();
   const cv = {
@@ -54,9 +54,19 @@ document.getElementById('formCurriculo').addEventListener('submit', function(e) 
     atualizado: new Date().toISOString()
   };
   localStorage.setItem('cl_cv_' + user.id, JSON.stringify(cv));
-  const candidatos = DB.getCandidatos();
-  const idx = candidatos.findIndex(c => c.id === user.id);
-  if (idx !== -1) { candidatos[idx].cv = cv; localStorage.setItem('cl_candidatos', JSON.stringify(candidatos)); }
+  
+  // Guardar no Supabase
+  try {
+    if (window.db) {
+      const { data: existing } = await window.db.from('curriculos').select('id').eq('candidato_id', user.id).single();
+      if (existing) {
+        await window.db.from('curriculos').update({...cv, updated_at: new Date().toISOString()}).eq('candidato_id', user.id);
+      } else {
+        await window.db.from('curriculos').insert([{candidato_id: user.id, ...cv}]);
+      }
+    }
+  } catch(e) { console.log('Supabase erro:', e); }
+
   mostrarToast('Currículo guardado com sucesso! 💾');
   atualizarProgresso();
 });
