@@ -58,12 +58,25 @@ document.getElementById('formCurriculo').addEventListener('submit', async functi
   // Guardar no Supabase
   try {
     if (window.db) {
-      const { data: existing } = await window.db.from('curriculos').select('id').eq('candidato_id', user.id).single();
+      const cvSupabase = {
+        candidato_id: user.id,
+        nome: cv.nome, nascimento: cv.nascimento, telefone: cv.telefone,
+        email: cv.email, concelho: cv.concelho, carta: cv.carta,
+        sobre: cv.sobre, area: cv.area, funcao: cv.funcao,
+        contrato: cv.contrato, disponibilidade: cv.disponibilidade,
+        escolaridade: cv.escolaridade, curso: cv.curso, escola: cv.escola,
+        ano: cv.ano, empresa_ant: cv.empresa_ant, funcao_ant: cv.funcao_ant,
+        periodo: cv.periodo, experiencia: cv.experiencia, desc_exp: cv.desc_exp,
+        competencias: cv.competencias, linguas: cv.linguas,
+        informatica: cv.informatica, certificados: cv.certificados
+      };
+      const { data: existing } = await window.db.from('curriculos').select('id').eq('candidato_id', user.id).maybeSingle();
       if (existing) {
-        await window.db.from('curriculos').update({...cv, updated_at: new Date().toISOString()}).eq('candidato_id', user.id);
+        await window.db.from('curriculos').update(cvSupabase).eq('candidato_id', user.id);
       } else {
-        await window.db.from('curriculos').insert([{candidato_id: user.id, ...cv}]);
+        await window.db.from('curriculos').insert([cvSupabase]);
       }
+      console.log('✅ Currículo guardado no Supabase!');
     }
   } catch(e) { console.log('Supabase erro:', e); }
 
