@@ -144,7 +144,17 @@ window.marcarInteresse = marcarInteresse;
 async function marcarInteresse(candidato_id, estado, btn) {
   const user = DB.getUtilizador();
   if (!user) return;
-  await Candidaturas.marcarInteresse(user.id, candidato_id, estado);
+
+  // Guardar no Supabase
+  try {
+    const { data: existing } = await window.db.from('candidaturas').select('id').eq('empresa_id', user.id).eq('candidato_id', candidato_id).maybeSingle();
+    if (existing) {
+      await window.db.from('candidaturas').update({ estado }).eq('id', existing.id);
+    } else {
+      await window.db.from('candidaturas').insert([{ empresa_id: user.id, candidato_id, estado }]);
+    }
+  } catch(e) { console.log('Erro:', e); }
+
   const acoes = btn.parentElement;
   acoes.innerHTML = estado === 'interesse'
     ? '<span style="color:#c9a84c;font-weight:700;font-size:.85rem;">⭐ Interesse marcado!</span>'

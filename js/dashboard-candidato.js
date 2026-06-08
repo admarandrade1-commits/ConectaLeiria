@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const user = DB.getUtilizador();
   if (!user || user.tipo !== 'candidato') { window.location.href = 'login.html'; return; }
   document.getElementById('nomeUtilizador').textContent = '👤 ' + user.nome.split(' ')[0];
@@ -7,6 +7,22 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('areaUser').textContent = user.area || '—';
   document.getElementById('numEmpresas').textContent = DB.getEmpresas().length;
   const cv = JSON.parse(localStorage.getItem('cl_cv_' + user.id) || '{}');
+
+  // Verificar se há interesse de alguma empresa no Supabase
+  try {
+    const { data } = await window.db.from('candidaturas').select('estado, empresas(nome)').eq('candidato_id', user.id).order('created_at', { ascending: false });
+    if (data && data.length > 0) {
+      const melhor = data[0];
+      const cores = { interesse: '#c9a84c', contactar: '#1a6b3c' };
+      const textos = { interesse: '⭐ Uma empresa tem interesse em ti!', contactar: '📞 Uma empresa quer contactar-te!' };
+      const estadoDiv = document.createElement('div');
+      estadoDiv.style.cssText = 'background:white;border-radius:16px;padding:1.2rem 1.5rem;margin-bottom:1.5rem;box-shadow:0 4px 24px rgba(26,107,60,.08);display:flex;align-items:center;gap:1rem;border-left:4px solid ' + (cores[melhor.estado] || '#999') + ';';
+      estadoDiv.innerHTML = '<div style="font-size:1.5rem;">' + (melhor.estado === 'interesse' ? '⭐' : '📞') + '</div><div><div style="font-weight:700;color:#1a1a2e;">' + (textos[melhor.estado] || '⏳ À espera de ser visto') + '</div><div style="font-size:.82rem;color:#666;margin-top:2px;">Empresa: ' + (melhor.empresas?.nome || '—') + '</div></div>';
+      const dashMain = document.querySelector('.dash-main');
+      const dashCards = document.querySelector('.dash-cards');
+      if (dashCards) dashMain.insertBefore(estadoDiv, dashCards);
+    }
+  } catch(e) { console.log('Erro estado:', e); }
   
   // Mostrar estado da candidatura
   const estado = Candidaturas.getEstado(user.id);
