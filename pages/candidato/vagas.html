@@ -64,6 +64,12 @@
     let todasVagas = [];
 
     document.addEventListener('DOMContentLoaded', async () => {
+      // Esperar que DB esteja disponível
+      let tentativas = 0;
+      while (typeof DB === 'undefined' && tentativas < 20) {
+        await new Promise(r => setTimeout(r, 100));
+        tentativas++;
+      }
       const user = DB.getUtilizador();
       if (!user || user.tipo !== 'candidato') { window.location.href = 'login.html'; return; }
       document.getElementById('nomeUtilizador').textContent = '👤 ' + user.nome.split(' ')[0];
