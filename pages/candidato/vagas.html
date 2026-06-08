@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ver Vagas — ConectaLeiria</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../../js/supabase-config.js"></script>
+  <script src="../../js/database.js"></script>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <a class="navbar-logo" href="../../index.html"><span class="logo-texto">Conecta<span class="logo-verde">Leiria</span></span></a>
+    <div class="navbar-ctas">
+      <span id="nomeUtilizador" class="navbar-user">👤 A carregar...</span>
+      <button onclick="DB.logout()" class="btn btn-secundario">Sair</button>
+    </div>
+  </nav>
+  <div class="dash-layout">
+    <aside class="sidebar">
+      <div class="sidebar-menu">
+        <a href="dashboard.html" class="sidebar-item">🏠 <span>Dashboard</span></a>
+        <a href="curriculo.html" class="sidebar-item">📄 <span>Meu Currículo</span></a>
+        <a href="vagas.html" class="sidebar-item ativo">🔍 <span>Ver Vagas</span></a>
+        <a href="#" onclick="DB.logout()" class="sidebar-item sair">🚪 <span>Sair</span></a>
+      </div>
+    </aside>
+    <main class="dash-main">
+      <div class="dash-header">
+        <div>
+          <h1 class="dash-titulo">🔍 Ver Vagas</h1>
+          <p class="dash-sub">Encontra o emprego certo para ti no Distrito de Leiria</p>
+        </div>
+      </div>
+
+      <!-- FILTROS -->
+      <div style="background:white;border-radius:16px;padding:1.5rem;box-shadow:0 4px 24px rgba(26,107,60,.08);margin-bottom:1.5rem;display:flex;gap:1rem;flex-wrap:wrap;">
+        <select id="filtroArea" onchange="filtrar()" style="flex:1;min-width:150px;padding:.7rem 1rem;border:2px solid #e8e8e8;border-radius:10px;font-size:.9rem;">
+          <option value="">Todas as Áreas</option>
+          <option>Restauração</option><option>Hotelaria</option><option>Comércio</option>
+          <option>Indústria</option><option>Construção</option><option>Saúde & Bem-estar</option>
+          <option>Tecnologia</option><option>Outra</option>
+        </select>
+        <select id="filtroConcelho" onchange="filtrar()" style="flex:1;min-width:150px;padding:.7rem 1rem;border:2px solid #e8e8e8;border-radius:10px;font-size:.9rem;">
+          <option value="">Todos os Concelhos</option>
+          <option>Nazaré</option><option>Leiria</option><option>Alcobaça</option>
+          <option>Caldas da Rainha</option><option>Marinha Grande</option><option>Pombal</option>
+          <option>Batalha</option><option>Peniche</option><option>Óbidos</option>
+        </select>
+        <select id="filtroContrato" onchange="filtrar()" style="flex:1;min-width:150px;padding:.7rem 1rem;border:2px solid #e8e8e8;border-radius:10px;font-size:.9rem;">
+          <option value="">Todos os Contratos</option>
+          <option>Tempo Inteiro</option><option>Tempo Parcial</option>
+          <option>Temporário</option><option>Estágio</option>
+        </select>
+      </div>
+
+      <div id="listaVagas" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem;"></div>
+    </main>
+  </div>
+
+  <script>
+    let todasVagas = [];
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = DB.getUtilizador();
+      if (!user || user.tipo !== 'candidato') { window.location.href = 'login.html'; return; }
+      document.getElementById('nomeUtilizador').textContent = '👤 ' + user.nome.split(' ')[0];
+      await carregarVagas();
+    });
+
+    async function carregarVagas() {
+      const lista = document.getElementById('listaVagas');
+      lista.innerHTML = '<p style="color:#666;grid-column:1/-1;">A carregar vagas...</p>';
+      const { data } = await window.db.from('vagas').select('*, empresas(nome)').eq('estado', 'aberta').order('created_at', { ascending: false });
+      todasVagas = data || [];
+      renderVagas(todasVagas);
+    }
+
+    function renderVagas(vagas) {
+      const lista = document.getElementById('listaVagas');
+      if (vagas.length === 0) {
+        lista.innerHTML = '<div style="grid-column:1/-1;background:white;border-radius:16px;padding:3rem;text-align:center;box-shadow:0 4px 24px rgba(26,107,60,.08);"><p style="color:#666;font-size:1.1rem;">Nenhuma vaga encontrada.<br>Tenta outros filtros!</p></div>';
+        return;
+      }
+      lista.innerHTML = vagas.map(v => `
+        <div style="background:white;border-radius:16px;padding:1.5rem;box-shadow:0 4px 24px rgba(26,107,60,.08);display:flex;flex-direction:column;gap:.8rem;">
+          <div style="font-size:1.1rem;font-weight:700;color:#1a1a2e;">${v.titulo}</div>
+          <div style="font-size:.9rem;color:#1a6b3c;font-weight:600;">🏢 ${v.empresas?.nome || 'Empresa'}</div>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+            <span style="background:rgba(26,107,60,.1);color:#1a6b3c;padding:.25rem .75rem;border-radius:50px;font-size:.8rem;font-weight:600;">${v.area || '—'}</span>
+            <span style="background:#f0f0f0;color:#666;padding:.25rem .75rem;border-radius:50px;font-size:.8rem;">📍 ${v.concelho || '—'}</span>
+            <span style="background:#f0f0f0;color:#666;padding:.25rem .75rem;border-radius:50px;font-size:.8rem;">💼 ${v.tipo_contrato || '—'}</span>
+          </div>
+          ${v.descricao ? `<p style="font-size:.88rem;color:#555;line-height:1.5;margin:0;">${v.descricao}</p>` : ''}
+          <div style="font-size:.78rem;color:#999;margin-top:.3rem;">Publicada em ${new Date(v.created_at).toLocaleDateString('pt-PT')}</div>
+        </div>
+      `).join('');
+    }
+
+    function filtrar() {
+      const area = document.getElementById('filtroArea').value;
+      const concelho = document.getElementById('filtroConcelho').value;
+      const contrato = document.getElementById('filtroContrato').value;
+      const filtradas = todasVagas.filter(v =>
+        (!area || v.area === area) &&
+        (!concelho || v.concelho === concelho) &&
+        (!contrato || v.tipo_contrato === contrato)
+      );
+      renderVagas(filtradas);
+    }
+  </script>
+</body>
+</html>
