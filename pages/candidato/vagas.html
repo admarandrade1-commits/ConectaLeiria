@@ -71,7 +71,7 @@
         await new Promise(r => setTimeout(r, 100));
         tentativas++;
       }
-      const user = Database.getUtilizador();
+      const user = DB.getUtilizador();
       if (!user || user.tipo !== 'candidato') { window.location.href = 'login.html'; return; }
       document.getElementById('nomeUtilizador').textContent = '👤 ' + user.nome.split(' ')[0];
       await carregarVagas();
