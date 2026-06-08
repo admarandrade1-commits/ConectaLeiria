@@ -142,7 +142,7 @@
 }
 
 /* FOTO DE PERFIL */
-.foto-perfil-wrap {
+.foto-perfil-wrap {width:100%;
   display: flex;
   align-items: center;
   gap: 2rem;
