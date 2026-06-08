@@ -7,7 +7,7 @@
 .sidebar-item.sair{margin-top:2rem;color:rgba(255,100,100,.7)}
 .sidebar-item.sair:hover{background:rgba(255,100,100,.1);color:#ff6464}
 .navbar-user{font-size:.9rem;font-weight:600;color:var(--verde-escuro);background:rgba(26,107,60,.08);padding:.4rem 1rem;border-radius:50px}
-.dash-main{margin-left:240px;padding:2.5rem 4rem;background:#f7f9f7;min-height:calc(100vh - 72px);width:calc(100% - 240px);box-sizing:border-box;}
+.dash-main{margin-left:240px;padding:2.5rem;background:#f7f9f7;min-height:calc(100vh - 72px);width:calc(100% - 240px);box-sizing:border-box;}
 .dash-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
 .dash-titulo{font-family:var(--fonte-display);font-size:clamp(1.5rem,3vw,2rem);color:var(--azul-noite);margin-bottom:.3rem}
 .dash-sub{font-size:.95rem;color:var(--cinza-medio)}
