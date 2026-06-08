@@ -1,8 +1,20 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const user = DB.getUtilizador();
   if (!user || user.tipo !== 'candidato') { window.location.href = 'login.html'; return; }
   document.getElementById('nomeUtilizador').textContent = '👤 ' + user.nome.split(' ')[0];
-  const cv = JSON.parse(localStorage.getItem('cl_cv_' + user.id) || '{}');
+
+  // Carregar do Supabase primeiro, senão usa localStorage
+  let cv = JSON.parse(localStorage.getItem('cl_cv_' + user.id) || '{}');
+  try {
+    if (window.db) {
+      const { data } = await window.db.from('curriculos').select('*').eq('candidato_id', user.id).maybeSingle();
+      if (data) {
+        cv = data;
+        localStorage.setItem('cl_cv_' + user.id, JSON.stringify(cv));
+        console.log('✅ Currículo carregado do Supabase!');
+      }
+    }
+  } catch(e) { console.log('Erro ao carregar do Supabase:', e); }
   const campos = ['nome','nascimento','telefone','email','concelho','carta','sobre','area','funcao','contrato','disponibilidade','escolaridade','curso','escola','ano','empresa_ant','funcao_ant','periodo','experiencia','desc_exp','competencias','linguas','informatica','certificados'];
   campos.forEach(c => { const el = document.getElementById('cv_' + c); if (el && cv[c]) el.value = cv[c]; });
   if (!cv.nome && user.nome) document.getElementById('cv_nome').value = user.nome;
