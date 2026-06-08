@@ -60,6 +60,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../../js/supabase-config.js"></script>
   <script src="../../js/database.js"></script>
+  <script src="../../js/app.js"></script>
   <script>
     let todasVagas = [];
 
@@ -70,7 +71,7 @@
         await new Promise(r => setTimeout(r, 100));
         tentativas++;
       }
-      const user = DB.getUtilizador();
+      const user = Database.getUtilizador();
       if (!user || user.tipo !== 'candidato') { window.location.href = 'login.html'; return; }
       document.getElementById('nomeUtilizador').textContent = '👤 ' + user.nome.split(' ')[0];
       await carregarVagas();
