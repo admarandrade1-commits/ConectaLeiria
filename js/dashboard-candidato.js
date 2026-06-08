@@ -73,7 +73,7 @@ async function carregarNotificacoes(user) {
     const lista = document.getElementById('notifLista');
     if (badge) {
       badge.textContent = data.length;
-      badge.style.display = 'flex';
+      badge.style.cssText = 'position:absolute;top:-4px;right:-4px;background:#e74c3c;color:white;border-radius:50%;width:18px;height:18px;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;';
     }
 
     // Preencher lista
