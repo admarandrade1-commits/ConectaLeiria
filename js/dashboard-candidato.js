@@ -73,7 +73,19 @@ async function carregarNotificacoes(user) {
     const lista = document.getElementById('notifLista');
     if (badge) {
       badge.textContent = data.length;
-      badge.style.cssText = 'position:absolute;top:-4px;right:-4px;background:#e74c3c;color:white;border-radius:50%;width:18px;height:18px;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;';
+      badge.style.display = 'flex';
+      badge.style.position = 'absolute';
+      badge.style.top = '-4px';
+      badge.style.right = '-4px';
+      badge.style.background = '#e74c3c';
+      badge.style.color = 'white';
+      badge.style.borderRadius = '50%';
+      badge.style.width = '18px';
+      badge.style.height = '18px';
+      badge.style.fontSize = '.7rem';
+      badge.style.fontWeight = '700';
+      badge.style.alignItems = 'center';
+      badge.style.justifyContent = 'center';
     }
 
     // Preencher lista
