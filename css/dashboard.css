@@ -31,7 +31,7 @@
 .curriculo-form{display:flex;flex-direction:column;gap:1.5rem;width:100%;}
 .curriculo-secao{background:#fff;border-radius:var(--raio-grande);padding:2rem;box-shadow:var(--sombra-suave);border:1px solid rgba(26,107,60,.06)}
 .secao-titulo{font-family:var(--fonte-display);font-size:1.1rem;font-weight:700;color:var(--azul-noite);margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem}
-.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
 .form-grupo{display:flex;flex-direction:column;gap:.4rem}
 .form-grupo label{font-size:.85rem;font-weight:600;color:var(--cinza-escuro)}
 .form-grupo input,.form-grupo select,.form-grupo textarea{padding:.75rem 1rem;border:2px solid #e8e8e8;border-radius:10px;font-family:var(--fonte-corpo);font-size:.92rem;color:var(--cinza-escuro);background:#fff;transition:var(--transicao);outline:none;width:100%}
