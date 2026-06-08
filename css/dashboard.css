@@ -276,12 +276,16 @@
 }
 
 
-/* CURRÍCULO - CENTRAR CONTEÚDO */
+/* CURRÍCULO - OCUPAR ESPAÇO DISPONÍVEL */
 .curriculo-form {
-  max-width: 900px !important;
-  margin: 0 auto !important;
   width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
 }
 .curriculo-secao {
   width: 100% !important;
+  box-sizing: border-box !important;
+}
+.form-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
 }
