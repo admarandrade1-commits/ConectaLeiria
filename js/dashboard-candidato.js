@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (cv.nome) {
     document.getElementById('statusCurriculo').textContent = 'Completo ✅';
+    document.getElementById('resumoCurriculo').style.display = 'none';
     const campos = ['nome','email','telefone','concelho','sobre','area','funcao','escolaridade','experiencia','competencias'];
     let preenchidos = campos.filter(c => cv[c] && cv[c].trim()).length;
     const pct = Math.round((preenchidos / campos.length) * 100);
