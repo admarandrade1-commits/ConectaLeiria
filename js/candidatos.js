@@ -124,23 +124,6 @@ document.getElementById('modalCurriculo').addEventListener('click', function(e) 
   if (e.target === this) fecharModal();
 });
 
-
-async function marcarInteresse(candidato_id, estado, btn) {
-  const user = DB.getUtilizador();
-  if (!user) return;
-  
-  await Candidaturas.marcarInteresse(user.id, candidato_id, estado);
-  
-  const acoes = btn.parentElement;
-  acoes.innerHTML = estado === 'interesse' 
-    ? '<span style="color:#c9a84c;font-weight:700;font-size:.85rem;">⭐ Interesse marcado!</span>'
-    : '<span style="color:#1a6b3c;font-weight:700;font-size:.85rem;">📞 Candidato será contactado!</span>';
-  
-  mostrarToast(estado === 'interesse' ? '⭐ Interesse marcado!' : '📞 Candidato será contactado!');
-}
-window.marcarInteresse = marcarInteresse;
-
-
 async function marcarInteresse(candidato_id, estado, btn) {
   const user = DB.getUtilizador();
   if (!user) return;
