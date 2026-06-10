@@ -78,22 +78,6 @@ window.addEventListener('beforeinstallprompt', (e) => {
   }
 });
 
-// Verificar se utilizador já está logado na página inicial
-document.addEventListener('DOMContentLoaded', () => {
-  const user = DB.getUtilizador();
-  if (user && window.location.pathname.includes('index.html') || 
-      user && window.location.pathname.endsWith('/ConectaLeiria/')) {
-    const ctas = document.querySelector('.navbar-ctas');
-    if (ctas) {
-      ctas.innerHTML = `
-        <span class="navbar-user">👤 ${user.nome ? user.nome.split(' ')[0] : user.nome}</span>
-        <a href="/ConectaLeiria/pages/${user.tipo}/dashboard.html" class="btn btn-primario">Dashboard</a>
-        <button onclick="DB.logout()" class="btn btn-secundario">Sair</button>
-      `;
-    }
-  }
-});
-
 // Verificar sessão na página inicial
 document.addEventListener('DOMContentLoaded', () => {
   const user = DB.getUtilizador();
