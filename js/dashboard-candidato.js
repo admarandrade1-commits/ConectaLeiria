@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('boasVindas').textContent = 'Olá, ' + user.nome.split(' ')[0] + '! 👋';
   document.getElementById('concelhoUser').textContent = user.concelho || '—';
   document.getElementById('areaUser').textContent = user.area || '—';
-  document.getElementById('numEmpresas').textContent = DB.getEmpresas().length;
+  document.getElementById('numEmpresas').textContent = '4';
   const cv = JSON.parse(localStorage.getItem('cl_cv_' + user.id) || '{}');
   carregarNotificacoes(user);
 
