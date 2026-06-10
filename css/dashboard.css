@@ -260,13 +260,13 @@
 }
 
 
-/* DASHBOARD EMPRESA - CARDS EM GRELHA 2x2 */
+/* DASHBOARD - CARDS EM GRELHA 2x2 */
 .dash-cards {
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
   gap: 1.2rem !important;
-  max-width: 700px !important;
-  margin: 0 auto 2rem auto !important;
+  width: 100% !important;
+  margin: 0 0 2rem 0 !important;
 }
 
 
