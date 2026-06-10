@@ -12,10 +12,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Verificar se há interesse de alguma empresa no Supabase
   try {
     const { data } = await window.db.from('candidaturas').select('estado, empresas(nome)').eq('id_da_caminha', user.id).order('created_at', { ascending: false });
-    if (data && data.length > 0) {
-      const melhor = data[0];
-      const cores = { interesse: '#c9a84c', contactar: '#1a6b3c' };
-      const textos = { interesse: '⭐ Uma empresa tem interesse em ti!', contactar: '📞 Uma empresa quer contactar-te!' };
   } catch(e) { console.log('Erro estado:', e); }
   
 
