@@ -5,14 +5,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('boasVindas').textContent = 'Olá, ' + user.nome.split(' ')[0] + '! 👋';
   document.getElementById('concelhoUser').textContent = user.concelho || '—';
   document.getElementById('areaUser').textContent = user.area || '—';
-  document.getElementById('numEmpresas').textContent = '4';
+  try {
+    const { data: empresas } = await window.db.from('empresas').select('id');
+    document.getElementById('numEmpresas').textContent = empresas ? empresas.length : '—';
+  } catch(e) { document.getElementById('numEmpresas').textContent = '—'; }
   const cv = JSON.parse(localStorage.getItem('cl_cv_' + user.id) || '{}');
   carregarNotificacoes(user);
 
-  // Verificar se há interesse de alguma empresa no Supabase
-  try {
-    const { data } = await window.db.from('candidaturas').select('estado, empresas(nome)').eq('id_da_caminha', user.id).order('created_at', { ascending: false });
-  } catch(e) { console.log('Erro estado:', e); }
+
   
 
   if (cv.nome) {
