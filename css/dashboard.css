@@ -16,7 +16,7 @@
 .progresso-barra{width:120px;height:8px;background:#e0e0e0;border-radius:50px;overflow:hidden}
 .progresso-fill{height:100%;background:linear-gradient(90deg,var(--verde-escuro),var(--verde-medio));border-radius:50px;transition:width .6s ease}
 .progresso-percent{font-size:.85rem;font-weight:700;color:var(--verde-escuro);white-space:nowrap}
-.dash-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;margin-bottom:2rem}
+.dash-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-bottom:2rem;width:100%;}
 .dash-card{background:#fff;border-radius:var(--raio);padding:1.4rem;display:flex;align-items:center;gap:1rem;box-shadow:var(--sombra-suave);border:1px solid rgba(26,107,60,.06);transition:var(--transicao)}
 .dash-card:hover{transform:translateY(-3px);box-shadow:var(--sombra-media)}
 .dash-card-icone{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
