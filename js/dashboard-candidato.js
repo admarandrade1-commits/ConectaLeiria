@@ -16,13 +16,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       const melhor = data[0];
       const cores = { interesse: '#c9a84c', contactar: '#1a6b3c' };
       const textos = { interesse: '⭐ Uma empresa tem interesse em ti!', contactar: '📞 Uma empresa quer contactar-te!' };
-      const estadoDiv = document.createElement('div');
-      estadoDiv.style.cssText = 'background:white;border-radius:16px;padding:1.2rem 1.5rem;margin-bottom:1.5rem;box-shadow:0 4px 24px rgba(26,107,60,.08);display:flex;align-items:center;gap:1rem;border-left:4px solid ' + (cores[melhor.estado] || '#999') + ';';
-      estadoDiv.innerHTML = '<div style="font-size:1.5rem;">' + (melhor.estado === 'interesse' ? '⭐' : '📞') + '</div><div><div style="font-weight:700;color:#1a1a2e;">' + (textos[melhor.estado] || '⏳ À espera de ser visto') + '</div><div style="font-size:.82rem;color:#666;margin-top:2px;">Empresa: ' + (melhor.empresas?.nome || '—') + '</div></div>';
-      const dashMain = document.querySelector('.dash-main');
-      const dashCards = document.querySelector('.dash-cards');
-      if (dashCards) dashMain.insertBefore(estadoDiv, dashCards);
-    }
   } catch(e) { console.log('Erro estado:', e); }
   
   // Mostrar estado da candidatura
