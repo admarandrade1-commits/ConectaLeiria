@@ -89,7 +89,7 @@
     async function carregarVagas() {
       const lista = document.getElementById('listaVagas');
       lista.innerHTML = '<p style="color:#666;">A carregar vagas...</p>';
-      const { data, error } = await window.db.from('vagas').select('*').eq('empresa_id', user.id).order('created_at', { ascending: false });
+      const { data, error } = await window.db.from('vagas').select('*').eq('empresa_id', user.id).order('id', { ascending: false });
       if (!data || data.length === 0) {
         lista.innerHTML = '<div style="background:white;border-radius:16px;padding:3rem;text-align:center;box-shadow:0 4px 24px rgba(26,107,60,.08);"><p style="color:#666;font-size:1.1rem;">Ainda não tens vagas publicadas.<br>Clica em "+ Nova Vaga" para começar!</p></div>';
         return;
@@ -123,9 +123,11 @@
       const contrato = document.getElementById('vContrato').value;
       const descricao = document.getElementById('vDescricao').value;
       if (!titulo || !area || !concelho) { alert('Preenche pelo menos o título, área e concelho!'); return; }
-      await window.db.from('vagas').insert([{ empresa_id: user.id, titulo, area, concelho, tipo_contrato: contrato, descricao, estado: 'aberta' }]);
+      const { error } = await window.db.from('vagas').insert([{ empresa_id: user.id, titulo, area, concelho, tipo_contrato: contrato, descricao, estado: 'aberta' }]);
+      if (error) { alert('Erro ao publicar: ' + error.message); console.log('Erro:', error); return; }
       fecharModal();
       await carregarVagas();
+      mostrarToast('Vaga publicada com sucesso! ✅');
     }
 
     async function toggleEstado(id, estadoAtual) {
