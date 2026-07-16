@@ -56,7 +56,7 @@ async function carregarNotificacoes(user) {
       lista.innerHTML = data.map(n => {
         const emoji = n.estado === 'interesse' ? '⭐' : '📞';
         const texto = n.estado === 'interesse' ? 'tem interesse no teu perfil!' : 'quer contactar-te!';
-        const data_fmt = new Date(n.criado_em).toLocaleDateString('pt-PT');
+        const data_fmt = n.criado_em ? new Date(n.criado_em).toLocaleDateString('pt-PT') : 'Agora';
         return `<div style="padding:1rem 1.2rem;border-bottom:1px solid #f9f9f9;display:flex;gap:.8rem;align-items:flex-start;">
           <span style="font-size:1.3rem;">${emoji}</span>
           <div>
