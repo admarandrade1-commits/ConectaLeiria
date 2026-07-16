@@ -26,7 +26,7 @@ async function carregarNotificacoes(user) {
     const { data } = await window.db
       .from('candidaturas')
       .select('estado, criado_em, empresas(nome)')
-      .eq('id_da_caminha', user.id)
+      .eq('candidato_id', user.id)
       .order('criado_em', { ascending: false });
 
     if (!data || data.length === 0) return;
