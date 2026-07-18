@@ -77,13 +77,48 @@
       await carregarVagas();
     });
 
+    let candidaturasFeitas = [];
+
     async function carregarVagas() {
       const lista = document.getElementById('listaVagas');
       lista.innerHTML = '<p style="color:#666;grid-column:1/-1;">A carregar vagas...</p>';
-      const { data } = await window.db.from('vagas').select('*').eq('estado', 'aberta').order('created_at', { ascending: false });
+      const user = DB.getUtilizador();
+      const { data } = await window.db.from('vagas').select('*, empresas(nome)').eq('estado', 'aberta').order('created_at', { ascending: false });
       todasVagas = data || [];
+
+      const { data: minhasCandidaturas } = await window.db.from('candidaturas').select('vaga_id').eq('candidato_id', user.id).not('vaga_id', 'is', null);
+      candidaturasFeitas = (minhasCandidaturas || []).map(c => c.vaga_id);
+
       renderVagas(todasVagas);
     }
+
+    async function candidatarVaga(vagaId, empresaId, btn) {
+      const user = DB.getUtilizador();
+      if (!user) return;
+      btn.disabled = true;
+      btn.textContent = 'A enviar...';
+      try {
+        const { error } = await window.db.from('candidaturas').insert([{
+          empresa_id: empresaId,
+          candidato_id: user.id,
+          vaga_id: vagaId,
+          estado: 'candidatura',
+          lida: false,
+          created_at: new Date().toISOString()
+        }]);
+        if (error) throw error;
+        candidaturasFeitas.push(vagaId);
+        btn.textContent = '✅ Candidatura enviada!';
+        btn.style.background = '#1a6b3c';
+        btn.style.color = 'white';
+      } catch(e) {
+        console.error('Erro ao candidatar:', e);
+        alert('⚠️ Não foi possível enviar a candidatura: ' + (e.message || JSON.stringify(e)));
+        btn.disabled = false;
+        btn.textContent = '📩 Candidatar-me';
+      }
+    }
+    window.candidatarVaga = candidatarVaga;
 
     function renderVagas(vagas) {
       const lista = document.getElementById('listaVagas');
@@ -91,10 +126,13 @@
         lista.innerHTML = '<div style="grid-column:1/-1;background:white;border-radius:16px;padding:3rem;text-align:center;box-shadow:0 4px 24px rgba(26,107,60,.08);"><p style="color:#666;font-size:1.1rem;">Nenhuma vaga encontrada.<br>Tenta outros filtros!</p></div>';
         return;
       }
-      lista.innerHTML = vagas.map(v => `
+      lista.innerHTML = vagas.map(v => {
+        const jaCandidatado = candidaturasFeitas.includes(v.id);
+        const nomeEmpresa = v.empresas ? v.empresas.nome : 'Empresa';
+        return `
         <div style="background:white;border-radius:16px;padding:1.5rem;box-shadow:0 4px 24px rgba(26,107,60,.08);display:flex;flex-direction:column;gap:.8rem;">
           <div style="font-size:1.1rem;font-weight:700;color:#1a1a2e;">${v.titulo}</div>
-          <div style="font-size:.9rem;color:#1a6b3c;font-weight:600;">🏢 ${'Empresa'}</div>
+          <div style="font-size:.9rem;color:#1a6b3c;font-weight:600;">🏢 ${nomeEmpresa}</div>
           <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
             <span style="background:rgba(26,107,60,.1);color:#1a6b3c;padding:.25rem .75rem;border-radius:50px;font-size:.8rem;font-weight:600;">${v['área'] || v.area || '—'}</span>
             <span style="background:#f0f0f0;color:#666;padding:.25rem .75rem;border-radius:50px;font-size:.8rem;">📍 ${v.concelho || '—'}</span>
@@ -102,8 +140,14 @@
           </div>
           ${v.descricao ? `<p style="font-size:.88rem;color:#555;line-height:1.5;margin:0;">${v.descricao}</p>` : ''}
           <div style="font-size:.78rem;color:#999;margin-top:.3rem;">Publicada em ${new Date(v.created_at).toLocaleDateString('pt-PT')}</div>
+          <button
+            ${jaCandidatado ? 'disabled' : ''}
+            onclick="candidatarVaga(${v.id}, ${v.empresa_id}, this)"
+            style="margin-top:.5rem;padding:.7rem;border:none;border-radius:10px;font-weight:700;cursor:${jaCandidatado ? 'default' : 'pointer'};background:${jaCandidatado ? '#1a6b3c' : '#c9a84c'};color:white;">
+            ${jaCandidatado ? '✅ Candidatura enviada!' : '📩 Candidatar-me'}
+          </button>
         </div>
-      `).join('');
+      `}).join('');
     }
 
     function filtrar() {
