@@ -25,7 +25,7 @@ async function carregarNotificacoes(user) {
   try {
     const { data } = await window.db
       .from('candidaturas')
-      .select('id, estado, empresa_id, criado_em')
+      .select('id, estado, empresa_id, created_at, lida')
       .eq('candidato_id', user.id)
       .order('id', { ascending: false });
 
@@ -69,7 +69,7 @@ async function carregarNotificacoes(user) {
         const emoji = n.estado === 'interesse' ? '⭐' : '📞';
         const texto = n.estado === 'interesse' ? 'tem interesse no teu perfil!' : 'quer contactar-te!';
         const agora = new Date();
-        const criado = n.criado_em ? new Date(n.criado_em) : agora;
+        const criado = n.created_at ? new Date(n.created_at) : agora;
         const diff = Math.floor((agora - criado) / 1000);
         let data_fmt;
         if (diff < 60) data_fmt = 'Agora';
