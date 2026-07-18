@@ -28,7 +28,7 @@ async function carregarNotificacoes(user) {
   try {
     const { data } = await window.db
       .from('candidaturas')
-      .select('id, estado, empresa_id, created_at, lida')
+      .select('id, estado, empresa_id, created_at, lida, empresas(nome, email, telefone)')
       .eq('candidato_id', user.id)
       .order('id', { ascending: false });
 
@@ -71,6 +71,9 @@ async function carregarNotificacoes(user) {
       lista.innerHTML = data.map(n => {
         const emoji = n.estado === 'interesse' ? '⭐' : '📞';
         const texto = n.estado === 'interesse' ? 'tem interesse no teu perfil!' : 'quer contactar-te!';
+        const nomeEmpresa = n.empresas ? n.empresas.nome : 'Uma empresa';
+        const email = n.empresas ? n.empresas.email : '';
+        const telefone = n.empresas ? n.empresas.telefone : '';
         const agora = new Date();
         const criado = n.created_at ? new Date(n.created_at) : agora;
         const diff = Math.floor((agora - criado) / 1000);
@@ -79,11 +82,16 @@ async function carregarNotificacoes(user) {
         else if (diff < 3600) data_fmt = Math.floor(diff/60) + ' min atrás';
         else if (diff < 86400) data_fmt = Math.floor(diff/3600) + 'h atrás';
         else data_fmt = Math.floor(diff/86400) + ' dia(s) atrás';
+        const contactos = [
+          email ? `<a href="mailto:${email}" style="color:#1a6b3c;text-decoration:none;font-size:.75rem;font-weight:600;">📧 Email</a>` : '',
+          telefone ? `<a href="tel:${telefone}" style="color:#1a6b3c;text-decoration:none;font-size:.75rem;font-weight:600;">📞 ${telefone}</a>` : ''
+        ].filter(Boolean).join(' &nbsp;·&nbsp; ');
         return `<div style="padding:1rem 1.2rem;border-bottom:1px solid #f9f9f9;display:flex;gap:.8rem;align-items:flex-start;">
           <span style="font-size:1.3rem;">${emoji}</span>
           <div>
-            <div style="font-weight:600;color:#1a1a2e;font-size:.9rem;">'Uma empresa' ${texto}</div>
-            <div style="font-size:.78rem;color:#999;margin-top:2px;">${data_fmt}</div>
+            <div style="font-weight:600;color:#1a1a2e;font-size:.9rem;">${nomeEmpresa} ${texto}</div>
+            <div style="font-size:.78rem;color:#999;margin:2px 0 6px;">${data_fmt}</div>
+            ${contactos ? `<div>${contactos}</div>` : ''}
           </div>
         </div>`;
       }).join('');
