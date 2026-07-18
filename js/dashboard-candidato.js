@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   const cv = JSON.parse(localStorage.getItem('cl_cv_' + user.id) || '{}');
   carregarNotificacoes(user);
 
+  // Atualizar notificações automaticamente a cada 15 segundos
+  setInterval(() => carregarNotificacoes(user), 15000);
+
 
   
 

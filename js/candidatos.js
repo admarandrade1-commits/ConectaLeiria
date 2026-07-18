@@ -130,13 +130,23 @@ async function marcarInteresse(candidato_id, estado, btn) {
 
   // Guardar no Supabase
   try {
-    const { data: existing } = await window.db.from('candidaturas').select('id').eq('empresa_id', user.id).eq('candidato_id', candidato_id).maybeSingle();
+    const { data: existing, error: errSelect } = await window.db.from('candidaturas').select('id').eq('empresa_id', user.id).eq('candidato_id', candidato_id).maybeSingle();
+    if (errSelect) throw errSelect;
+
+    let errSave;
     if (existing) {
-      await window.db.from('candidaturas').update({ estado }).eq('id', existing.id);
+      const { error } = await window.db.from('candidaturas').update({ estado, lida: false }).eq('id', existing.id);
+      errSave = error;
     } else {
-      await window.db.from('candidaturas').insert([{ empresa_id: user.id, candidato_id, estado }]);
+      const { error } = await window.db.from('candidaturas').insert([{ empresa_id: user.id, candidato_id, estado, lida: false }]);
+      errSave = error;
     }
-  } catch(e) { console.log('Erro:', e); }
+    if (errSave) throw errSave;
+  } catch(e) {
+    console.error('Erro ao gravar candidatura:', e);
+    alert('⚠️ Não foi possível notificar o candidato. Erro: ' + (e.message || JSON.stringify(e)));
+    return;
+  }
 
   const acoes = btn.parentElement;
   acoes.innerHTML = estado === 'interesse'
