@@ -34,8 +34,9 @@ async function carregarNotificacoes(user) {
     // Atualizar badge
     const badge = document.getElementById('sinoBadge');
     const lista = document.getElementById('notifLista');
+    const naoLidas = data.filter(n => !n.lida).length;
     if (badge) {
-      badge.textContent = data.length;
+      badge.textContent = naoLidas;
       badge.style.display = 'flex';
       badge.style.position = 'absolute';
       badge.style.top = '-4px';
@@ -58,7 +59,7 @@ async function carregarNotificacoes(user) {
       if (btnLimpar) {
         btnLimpar.style.display = 'block';
         btnLimpar.onclick = async () => {
-          await window.db.from('candidaturas').delete().eq('candidato_id', user.id);
+          await window.db.from('candidaturas').update({ lida: true }).eq('candidato_id', user.id);
           lista.innerHTML = '<p style="padding:1rem;color:#999;text-align:center;">Sem notificações.</p>';
           if (badge) badge.style.display = 'none';
           if (btnLimpar) btnLimpar.style.display = 'none';
@@ -96,7 +97,7 @@ window.toggleNotificacoes = toggleNotificacoes;
 async function limparNotificacoes() {
   const user = DB.getUtilizador();
   if (!user) return;
-  await window.db.from('candidaturas').delete().eq('candidato_id', user.id);
+  await window.db.from('candidaturas').update({ lida: true }).eq('candidato_id', user.id);
   const lista = document.getElementById('notifLista');
   const badge = document.getElementById('sinoBadge');
   const btn = document.getElementById('btnLimparNotif');

@@ -17,15 +17,16 @@ const Candidaturas = {
     
     localStorage.setItem(chave, JSON.stringify(interesses));
 
-    // Guardar também no Supabase se disponível
+    // Guardar no Supabase (fonte principal de verdade)
     try {
       if (window.db) {
-        await window.db.from('candidaturas').upsert({
-          empresa_id, candidato_id, estado,
+        const { error } = await window.db.from('candidaturas').upsert({
+          empresa_id, candidato_id, estado, lida: false,
           updated_at: new Date().toISOString()
-        });
+        }, { onConflict: 'empresa_id,candidato_id' });
+        if (error) console.error('Erro ao gravar candidatura no Supabase:', error);
       }
-    } catch(e) {}
+    } catch(e) { console.error('Erro ao gravar candidatura no Supabase:', e); }
   },
 
   // Ver estado de um candidato
