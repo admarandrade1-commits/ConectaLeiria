@@ -133,12 +133,13 @@ async function marcarInteresse(candidato_id, estado, btn) {
     const { data: existing, error: errSelect } = await window.db.from('candidaturas').select('id').eq('empresa_id', user.id).eq('candidato_id', candidato_id).maybeSingle();
     if (errSelect) throw errSelect;
 
+    const agora = new Date().toISOString();
     let errSave;
     if (existing) {
-      const { error } = await window.db.from('candidaturas').update({ estado, lida: false }).eq('id', existing.id);
+      const { error } = await window.db.from('candidaturas').update({ estado, lida: false, created_at: agora }).eq('id', existing.id);
       errSave = error;
     } else {
-      const { error } = await window.db.from('candidaturas').insert([{ empresa_id: user.id, candidato_id, estado, lida: false }]);
+      const { error } = await window.db.from('candidaturas').insert([{ empresa_id: user.id, candidato_id, estado, lida: false, created_at: agora }]);
       errSave = error;
     }
     if (errSave) throw errSave;
