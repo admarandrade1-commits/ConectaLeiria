@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     const { data: candidaturas, error } = await window.db
       .from('candidaturas')
-      .select('id, estado, created_at, candidatos(nome), vagas(titulo)')
+      .select('id, estado, created_at, candidatos(id, nome, email, telefone), vagas(titulo)')
       .eq('empresa_id', user.id)
       .not('vaga_id', 'is', null)
       .order('id', { ascending: false });
@@ -22,16 +22,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       listaCV.innerHTML = candidaturas.map(c => {
         const nome = c.candidatos ? c.candidatos.nome : 'Candidato';
+        const candidatoId = c.candidatos ? c.candidatos.id : null;
+        const email = c.candidatos ? c.candidatos.email : '';
+        const telefone = c.candidatos ? c.candidatos.telefone : '';
         const vaga = c.vagas ? c.vagas.titulo : 'Vaga';
         const iniciais = nome.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
         const data_fmt = c.created_at ? new Date(c.created_at).toLocaleDateString('pt-PT') : '';
-        return `<div class="candidato-lista-item">
+        return `<div class="candidato-lista-item" style="flex-wrap:wrap;">
           <div class="candidato-lista-avatar">${iniciais}</div>
           <div class="candidato-lista-info">
             <div class="candidato-lista-nome">${nome}</div>
             <div class="candidato-lista-detalhe">Candidatou-se a "${vaga}" · ${data_fmt}</div>
           </div>
-          <span class="tag verde">Nova candidatura</span>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;">
+            <a href="candidatos.html" style="padding:.5rem 1rem;border-radius:8px;background:#1a1a2e;color:white;text-decoration:none;font-size:.82rem;font-weight:600;">📄 Ver Currículo</a>
+            ${email ? `<a href="mailto:${email}" style="padding:.5rem 1rem;border-radius:8px;background:#1a6b3c;color:white;text-decoration:none;font-size:.82rem;font-weight:600;">📧 Email</a>` : ''}
+            ${telefone ? `<a href="tel:${telefone}" style="padding:.5rem 1rem;border-radius:8px;background:#c9a84c;color:white;text-decoration:none;font-size:.82rem;font-weight:600;">📞 ${telefone}</a>` : ''}
+          </div>
         </div>`;
       }).join('');
     }
