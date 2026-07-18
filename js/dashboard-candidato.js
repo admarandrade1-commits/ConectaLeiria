@@ -25,7 +25,7 @@ async function carregarNotificacoes(user) {
   try {
     const { data } = await window.db
       .from('candidaturas')
-      .select('estado, empresa_id')
+      .select('id, estado, empresa_id, criado_em')
       .eq('candidato_id', user.id)
       .order('id', { ascending: false });
 
@@ -53,10 +53,28 @@ async function carregarNotificacoes(user) {
 
     // Preencher lista
     if (lista) {
+      // Adicionar botão limpar
+      const btnLimpar = document.getElementById('btnLimparNotif');
+      if (btnLimpar) {
+        btnLimpar.style.display = 'block';
+        btnLimpar.onclick = async () => {
+          await window.db.from('candidaturas').delete().eq('candidato_id', user.id);
+          lista.innerHTML = '<p style="padding:1rem;color:#999;text-align:center;">Sem notificações.</p>';
+          if (badge) badge.style.display = 'none';
+          if (btnLimpar) btnLimpar.style.display = 'none';
+        };
+      }
       lista.innerHTML = data.map(n => {
         const emoji = n.estado === 'interesse' ? '⭐' : '📞';
         const texto = n.estado === 'interesse' ? 'tem interesse no teu perfil!' : 'quer contactar-te!';
-        const data_fmt = n.criado_em ? new Date(n.criado_em).toLocaleDateString('pt-PT') : 'Agora';
+        const agora = new Date();
+        const criado = n.criado_em ? new Date(n.criado_em) : agora;
+        const diff = Math.floor((agora - criado) / 1000);
+        let data_fmt;
+        if (diff < 60) data_fmt = 'Agora';
+        else if (diff < 3600) data_fmt = Math.floor(diff/60) + ' min atrás';
+        else if (diff < 86400) data_fmt = Math.floor(diff/3600) + 'h atrás';
+        else data_fmt = Math.floor(diff/86400) + ' dia(s) atrás';
         return `<div style="padding:1rem 1.2rem;border-bottom:1px solid #f9f9f9;display:flex;gap:.8rem;align-items:flex-start;">
           <span style="font-size:1.3rem;">${emoji}</span>
           <div>
@@ -74,6 +92,19 @@ function toggleNotificacoes() {
   if (panel) panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
 }
 window.toggleNotificacoes = toggleNotificacoes;
+
+async function limparNotificacoes() {
+  const user = DB.getUtilizador();
+  if (!user) return;
+  await window.db.from('candidaturas').delete().eq('candidato_id', user.id);
+  const lista = document.getElementById('notifLista');
+  const badge = document.getElementById('sinoBadge');
+  const btn = document.getElementById('btnLimparNotif');
+  if (lista) lista.innerHTML = '<p style="padding:1rem;color:#999;text-align:center;font-size:.9rem;">Sem notificações.</p>';
+  if (badge) badge.style.display = 'none';
+  if (btn) btn.style.display = 'none';
+}
+window.limparNotificacoes = limparNotificacoes;
 
 // Fechar ao clicar fora
 document.addEventListener('click', (e) => {
